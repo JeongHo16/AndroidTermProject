@@ -66,8 +66,13 @@ class MyItem{
     String price;
     String point;
 
+<<<<<<< HEAD
     public MyItem(int image, String name, String price, String point){
       //  this.image = image;
+=======
+    public MyItem(int image, String name, String price){
+        //this.image = image;
+>>>>>>> 3385f2f74eccf98ae009f8e609c5b4d61576d389
         this.name = name;
         this.price = price;
         this.point = point;

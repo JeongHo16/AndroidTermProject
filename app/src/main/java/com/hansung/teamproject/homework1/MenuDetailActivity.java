@@ -26,6 +26,7 @@ public class MenuDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_menu_detail);
+
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         String price = intent.getStringExtra("price");
