@@ -52,13 +52,15 @@ public class CustomAdapter extends BaseAdapter{
         }
 
         ImageView Image = (ImageView) view.findViewById(R.id.Item_image);
+
         TextView Text1 = (TextView) view.findViewById(R.id.Item_name);
+
         TextView Text2 = (TextView) view.findViewById(R.id.Item_price);
 
-        //Image.setImageResource(mData.get(i).image);
-
         Image.setImageResource(mData.get(i).image);
+
         Text1.setText(mData.get(i).name);
+
         Text2.setText(mData.get(i).price);
 
         return view;
@@ -71,7 +73,6 @@ class MyItem{
     String point;
 
     public MyItem(int image, String name, String price, String point){
-
         this.image = image;
         this.name = name;
         this.price = price;
