@@ -64,10 +64,12 @@ class MyItem{
     int image;
     String name;
     String price;
+    String point;
 
-    public MyItem(int image, String name, String price){
-        this.image = image;
+    public MyItem(int image, String name, String price, String point){
+      //  this.image = image;
         this.name = name;
         this.price = price;
+        this.point = point;
     }
 }
