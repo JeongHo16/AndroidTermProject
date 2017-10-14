@@ -27,7 +27,7 @@ public class MenuDetailActivity extends AppCompatActivity {
         data.add(new MyItem(ContextCompat.getDrawable(this, R.drawable.bossam_M), "보쌈 중", "25.000"));
         data.add(new MyItem(ContextCompat.getDrawable(this, R.drawable.bossam_M), "보쌈 대", "30.000"));
 
-        final CustomActivity adapter = new CustomActivity(data, this, R.layout.custom_view_lay);
+        final CustomAdapter adapter = new CustomAdapter(data, this, R.layout.custom_view_lay);
 
         ListView listView = (ListView) findViewById(R.id.list_item);
         listView.setDivider(new ColorDrawable(Color.BLACK));
