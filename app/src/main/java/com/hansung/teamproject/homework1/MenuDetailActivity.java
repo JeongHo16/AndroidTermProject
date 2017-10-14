@@ -40,7 +40,7 @@ public class MenuDetailActivity extends AppCompatActivity {
         }
         if(price != null){
             TextView priceView = (TextView) findViewById(R.id.view_prise);
-            priceView.setText(price);
+            priceView.setText(price+"원");
         }
         if(image != 0){
             ImageView imageView = (ImageView) findViewById(R.id.view_image);
@@ -48,7 +48,7 @@ public class MenuDetailActivity extends AppCompatActivity {
         }
         if(point != null){
             TextView pointView = (TextView) findViewById(R.id.view_point);
-            pointView.setText(point);
+            pointView.setText("평점:"+point);
         }
 
         ActionBar actionBar = getSupportActionBar();
