@@ -17,9 +17,9 @@ import java.util.ArrayList;
  */
 
 public class CustomAdapter extends BaseAdapter{
-    ArrayList<MyItem> mData;
-    Context mContext;
-    int mResource;
+    private Context mContext;
+    private int mResource;
+    private ArrayList<MyItem> mData = new ArrayList<MyItem>();
 
     public CustomAdapter(ArrayList<MyItem> data, Context context, int resource){
         mData = data;
@@ -43,6 +43,7 @@ public class CustomAdapter extends BaseAdapter{
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+
         if(view == null){
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(mResource, viewGroup, false);
@@ -52,7 +53,7 @@ public class CustomAdapter extends BaseAdapter{
         TextView Text1 = view.findViewById(R.id.Item_name);
         TextView Text2 = view.findViewById(R.id.Item_price);
 
-        Image.setImageDrawable(mData.get(i).image);
+        Image.setImageResource(mData.get(i).image);
         Text1.setText(mData.get(i).name);
         Text2.setText(mData.get(i).price);
 
@@ -60,10 +61,11 @@ public class CustomAdapter extends BaseAdapter{
     }
 }
 class MyItem{
-    Drawable image;
+    int image;
     String name;
     String price;
-    public MyItem(Drawable image, String name, String price){
+
+    public MyItem(int image, String name, String price){
         this.image = image;
         this.name = name;
         this.price = price;
