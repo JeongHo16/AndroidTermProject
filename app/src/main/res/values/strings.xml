@@ -1,6 +1,3 @@
 <resources>
     <string name="app_name">Homework1</string>
-    <string name="address">서울 성북구 섬선교로16길 35</string>
-    <string name="phonenumber">02-953-5155</string>
-    <string name="time">월-토(11am-9pm)</string>
 </resources>
