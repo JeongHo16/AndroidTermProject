@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,7 +34,6 @@ public class MenuDetailActivity extends AppCompatActivity {
         int image = intent.getIntExtra("image", 0);
         String point = intent.getStringExtra("point");
 
-
         if(name != null) {
             TextView nameView = (TextView) findViewById(R.id.view_name);
             nameView.setText(name);
@@ -49,6 +49,16 @@ public class MenuDetailActivity extends AppCompatActivity {
         if(point != null){
             TextView pointView = (TextView) findViewById(R.id.view_point);
             pointView.setText(point);
+        }
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            Drawable drawable = getDrawable(R.drawable.ic_keyboard_arrow_left_black_24dp);
+            if (drawable != null) {
+                drawable.setTint(Color.WHITE);
+                actionBar.setHomeAsUpIndicator(drawable);
+            }
         }
 
     }
