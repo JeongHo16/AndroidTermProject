@@ -13,7 +13,7 @@
             android:background="@android:color/holo_blue_light"
             android:gravity="center_horizontal"
             android:padding="8dp"
-            android:text="학생식당"
+            android:text="@string/title"
             android:textSize="28dp" />
 
         <LinearLayout
