@@ -69,7 +69,6 @@
                                     android:layout_marginLeft="10dp"
                                     android:onClick="call"
                                     android:padding="0dp"
-                                    android:scaleType="fitXY"
                                     android:src="@drawable/phoneicon" />
                         </LinearLayout>
 
