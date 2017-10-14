@@ -65,10 +65,22 @@ class MyItem{
     int image;
     String name;
     String price;
+    String point;
 
+<<<<<<< HEAD
     MyItem(int image, String name, String price){
         this.image = image;
+=======
+<<<<<<< HEAD
+    public MyItem(int image, String name, String price, String point){
+      //  this.image = image;
+=======
+    public MyItem(int image, String name, String price){
+        //this.image = image;
+>>>>>>> 3385f2f74eccf98ae009f8e609c5b4d61576d389
+>>>>>>> 3442466593f231b122db4c691cfe24e696c5bab0
         this.name = name;
         this.price = price;
+        this.point = point;
     }
 }
