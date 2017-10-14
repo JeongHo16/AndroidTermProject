@@ -1,6 +1,8 @@
 package com.hansung.teamproject.homework1;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.view.LayoutInflater;
@@ -53,7 +55,8 @@ public class CustomAdapter extends BaseAdapter{
         TextView Text1 = (TextView) view.findViewById(R.id.Item_name);
         TextView Text2 = (TextView) view.findViewById(R.id.Item_price);
 
-        Image.setImageResource(mData.get(i).image);
+        //Image.setImageResource(mData.get(i).image);
+
         Text1.setText(mData.get(i).name);
         Text2.setText(mData.get(i).price);
 
@@ -66,13 +69,10 @@ class MyItem{
     String price;
     String point;
 
-<<<<<<< HEAD
+
     public MyItem(int image, String name, String price, String point){
-      //  this.image = image;
-=======
-    public MyItem(int image, String name, String price){
-        //this.image = image;
->>>>>>> 3385f2f74eccf98ae009f8e609c5b4d61576d389
+
+        this.image = image;
         this.name = name;
         this.price = price;
         this.point = point;
