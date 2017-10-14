@@ -3,17 +3,24 @@ package com.hansung.teamproject.homework1;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+<<<<<<< HEAD
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+=======
+>>>>>>> 974848aa00307c5a07f933fd7cd2519aea5a82df
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+<<<<<<< HEAD
 import android.widget.TextView;
 import android.widget.Toast;
+=======
+>>>>>>> 974848aa00307c5a07f933fd7cd2519aea5a82df
 
 import java.util.ArrayList;
 
@@ -25,7 +32,7 @@ public class RestaurantDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_restaurant_detail);
     }
 
-        /*ArrayList<MyItem> data = new ArrayList<MyItem>();
+        ArrayList<MyItem> data = new ArrayList<MyItem>();
 
         data.add(new MyItem(R.drawable.noodle_soup, "손칼국수", "5.000"));
         data.add(new MyItem(R.drawable.bossam_formality, "보쌈 정식", "7.000"));
@@ -46,9 +53,16 @@ public class RestaurantDetailActivity extends AppCompatActivity {
                 int imageView = ((MyItem)adapter.getItem(i)).image;
                 String name = ((MyItem)adapter.getItem(i)).name;
                 String price = ((MyItem)adapter.getItem(i)).price;
-                Toast.makeText(RestaurantDetailActivity.this,  name + price, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), MenuDetailActivity.class);
+                intent.putExtra("item_image", imageView);
+                intent.putExtra("item_name", name);
+                intent.putExtra("item_price", price);
+                startActivity(intent);
+
+
+
             }
-        });*/
+        });
 
         public void call(View v){
             TextView textView = (TextView)findViewById(R.id.phonenumber);
