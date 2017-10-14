@@ -49,9 +49,9 @@ public class CustomAdapter extends BaseAdapter{
             view = inflater.inflate(mResource, viewGroup, false);
         }
 
-        ImageView Image = view.findViewById(R.id.Item_image);
-        TextView Text1 = view.findViewById(R.id.Item_name);
-        TextView Text2 = view.findViewById(R.id.Item_price);
+        ImageView Image = (ImageView) view.findViewById(R.id.Item_image);
+        TextView Text1 = (TextView) view.findViewById(R.id.Item_name);
+        TextView Text2 = (TextView) view.findViewById(R.id.Item_price);
 
         Image.setImageResource(mData.get(i).image);
         Text1.setText(mData.get(i).name);
