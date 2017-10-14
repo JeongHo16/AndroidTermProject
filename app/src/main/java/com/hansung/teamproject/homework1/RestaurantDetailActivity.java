@@ -29,10 +29,10 @@ public class RestaurantDetailActivity extends AppCompatActivity {
 
         ArrayList<MyItem> data = new ArrayList<MyItem>();
 
-        data.add(new MyItem(R.drawable.noodle_soup, "손칼국수", "5.000", "4.5"));
-        data.add(new MyItem(R.drawable.bossam_formality, "보쌈 정식", "7.000", "4.0"));
-        data.add(new MyItem(R.drawable.bossam_m, "보쌈 중", "25.000", "4.1"));
-        data.add(new MyItem(R.drawable.bossam_m, "보쌈 대", "30.000", "3.7"));
+        data.add(new MyItem(R.drawable.noodle_soup, "손칼국수", "5.000", "평점:4.5"));
+        data.add(new MyItem(R.drawable.bossam_formality, "보쌈 정식", "7.000", "평점:4.0"));
+        data.add(new MyItem(R.drawable.bossam_m, "보쌈 중", "25.000", "평점:4.1"));
+        data.add(new MyItem(R.drawable.bossam_l, "보쌈 대", "30.000", "평점:3.7"));
 
         final CustomAdapter adapter = new CustomAdapter(this, R.layout.custom_view_lay, data);
 
