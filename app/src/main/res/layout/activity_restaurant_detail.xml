@@ -19,45 +19,68 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:background="@android:color/holo_green_light"
+            android:orientation="horizontal">
+
                 <ImageView
-                    android:layout_width="90dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/titleboard"
-                    android:layout_weight="1"/>
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/titleboard" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_height="match_parent"
                     android:layout_weight="2"
-                    >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="주소"/>
+                    android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="전화번호"/>
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="1"
+                            android:gravity="top"
+                            android:text="@string/address"
+                            android:textColor="@android:color/black"
+                            android:textSize="17dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="영업시간"/>
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="@string/phonenumber"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="17dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:gravity="bottom"
+                            android:text="@string/time"
+                            android:textColor="@android:color/black"
+                            android:textSize="17dp" />
 
                 </LinearLayout>
 
         </LinearLayout>
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="메뉴"
-            android:background="@android:color/holo_orange_light" />
-
-
+            android:background="@android:color/holo_orange_light"
+            android:paddingLeft="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="15dp"
+            android:text="메뉴" />
 
 
 </LinearLayout>

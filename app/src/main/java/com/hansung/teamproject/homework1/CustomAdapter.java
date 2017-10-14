@@ -16,12 +16,12 @@ import java.util.ArrayList;
  * Created by Junho on 2017-10-14.
  */
 
-public class CustomActivity extends BaseAdapter{
+public class CustomAdapter extends BaseAdapter{
     ArrayList<MyItem> mData;
     Context mContext;
     int mResource;
 
-    public CustomActivity(ArrayList<MyItem> data, Context context, int resource){
+    public CustomAdapter(ArrayList<MyItem> data, Context context, int resource){
         mData = data;
         mContext = context;
         mResource = resource;
