@@ -57,7 +57,10 @@
             android:text="메뉴"
             android:background="@android:color/holo_orange_light" />
 
-
+    <ListView
+        android:id="@+id/list_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

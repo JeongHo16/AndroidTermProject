@@ -54,7 +54,7 @@ public class CustomActivity extends BaseAdapter{
 
         Image.setImageDrawable(mData.get(i).image);
         Text1.setText(mData.get(i).name);
-        Text2.setText(mData.get(i).tel);
+        Text2.setText(mData.get(i).price);
 
         return view;
     }
@@ -62,10 +62,10 @@ public class CustomActivity extends BaseAdapter{
 class MyItem{
     Drawable image;
     String name;
-    String tel;
-    public MyItem(Drawable image, String name, String tel){
+    String price;
+    public MyItem(Drawable image, String name, String price){
         this.image = image;
         this.name = name;
-        this.tel = tel;
+        this.price = price;
     }
 }
