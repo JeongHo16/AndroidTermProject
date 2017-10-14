@@ -47,16 +47,30 @@
                             android:textColor="@android:color/black"
                             android:textSize="17dp" />
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:orientation="horizontal"
                             android:layout_marginBottom="3dp"
                             android:layout_marginTop="3dp"
-                            android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="@string/phonenumber"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="17dp" />
+                            android:layout_weight="1">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:text="@string/phonenumber"
+                                    android:textColor="@color/colorAccent"
+                                    android:textSize="17dp" />
+                                <ImageButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    />
+
+                        </LinearLayout>
+
+
 
                         <TextView
                             android:layout_width="wrap_content"
