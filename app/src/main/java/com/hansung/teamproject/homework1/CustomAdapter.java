@@ -21,9 +21,9 @@ public class CustomAdapter extends BaseAdapter{
     private int mResource;
     private ArrayList<MyItem> mData = new ArrayList<MyItem>();
 
-    public CustomAdapter(ArrayList<MyItem> data, Context context, int resource){
-        mData = data;
+    public CustomAdapter(Context context, int resource, ArrayList<MyItem> data){
         mContext = context;
+        mData = data;
         mResource = resource;
     }
     @Override
@@ -50,11 +50,12 @@ public class CustomAdapter extends BaseAdapter{
         }
 
         ImageView Image = (ImageView) view.findViewById(R.id.Item_image);
-        TextView Text1 = (TextView) view.findViewById(R.id.Item_name);
-        TextView Text2 = (TextView) view.findViewById(R.id.Item_price);
-
         Image.setImageResource(mData.get(i).image);
+
+        TextView Text1 = (TextView) view.findViewById(R.id.Item_name);
         Text1.setText(mData.get(i).name);
+
+        TextView Text2 = (TextView) view.findViewById(R.id.Item_price);
         Text2.setText(mData.get(i).price);
 
         return view;
@@ -65,8 +66,8 @@ class MyItem{
     String name;
     String price;
 
-    public MyItem(int image, String name, String price){
-        //this.image = image;
+    MyItem(int image, String name, String price){
+        this.image = image;
         this.name = name;
         this.price = price;
     }

@@ -19,12 +19,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class RestaurantDetailActivity extends AppCompatActivity {
-    static CustomAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_detail);
-
 
         ArrayList<MyItem> data = new ArrayList<MyItem>();
         data.add(new MyItem(R.drawable.noodle_soup, "손칼국수", "5.000"));
@@ -32,7 +31,7 @@ public class RestaurantDetailActivity extends AppCompatActivity {
         data.add(new MyItem(R.drawable.bossam_m, "보쌈 중", "25.000"));
         data.add(new MyItem(R.drawable.bossam_m, "보쌈 대", "30.000"));
 
-        adapter = new CustomAdapter(data, this, R.layout.custom_view_lay);
+        final CustomAdapter adapter = new CustomAdapter(this, R.layout.custom_view_lay, data);
 
         ListView listView = (ListView) findViewById(R.id.list_item);
         listView.setAdapter(adapter);
@@ -51,9 +50,6 @@ public class RestaurantDetailActivity extends AppCompatActivity {
                 intent.putExtra("item_name", name);
                 intent.putExtra("item_price", price);
                 //startActivity(intent);
-
-
-
             }
         });
     }

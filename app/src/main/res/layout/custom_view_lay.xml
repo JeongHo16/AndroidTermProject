@@ -2,31 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/Item_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:layout_weight="1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="left"
-        android:text="Image" />
+        android:layout_weight="1"
+        android:padding="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/titleboard" />
 
     <TextView
         android:id="@+id/Item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_weight="1"
-        android:layout_gravity="center_horizontal"
-        android:text="Item_name" />
+        android:paddingLeft="10dp"
+        android:text="name"
+        android:textColor="@color/colorAccent"
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/Item_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_weight="1"
-        android:layout_gravity="right"
-        android:text="Item_price" />
+        android:gravity="right"
+        android:text="price"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18dp" />
 
 </LinearLayout>
