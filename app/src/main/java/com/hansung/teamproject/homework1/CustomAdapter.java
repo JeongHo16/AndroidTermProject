@@ -66,7 +66,7 @@ class MyItem{
     String price;
 
     public MyItem(int image, String name, String price){
-        this.image = image;
+        //this.image = image;
         this.name = name;
         this.price = price;
     }

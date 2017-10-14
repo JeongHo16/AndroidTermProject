@@ -22,6 +22,7 @@ public class MenuDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_detail);
+
         Intent intent = getIntent();
         int image = intent.getIntExtra("item_image", 1);
         String name = intent.getStringExtra("item_name");
