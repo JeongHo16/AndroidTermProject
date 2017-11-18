@@ -8,4 +8,8 @@
     <string name="menuprice">메뉴 가격</string>
     <string name="menudescription">메뉴 설명</string>
     <string name="menuadd">메뉴 추가</string>
+    <string name="pluses_restaurant">업소 이름</string>
+    <string name="pluses_address">주 소</string>
+    <string name="pluses_num">연락처</string>
+    <string name="pluses_img">맛집 등록</string>
 </resources>

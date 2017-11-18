@@ -1,0 +1,142 @@
+package com.hansung.teamproject.homework1;
+
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * Created by Junho on 2017-11-18.
+ */
+
+public class Restaurant_pluses extends AppCompatActivity{
+
+    final int REQUEST_EXTERNAL_STORAGE_FOR_MULTIMEDIA = 1;
+    static File mPhotoFile;
+    static String mPhotoFileName;
+    final int REQUEST_IMAGE_CAPTURE = 100;
+    Uri imageUri;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.restaurant_pluses);
+
+        checkDangerousPermissions();
+
+        final ImageView cammera = (ImageButton) findViewById(R.id.cammraBtn);
+        Button pluses = (Button) findViewById(R.id.pluses);
+
+        final EditText name = (EditText) findViewById(R.id.name);
+        final EditText address = (EditText) findViewById(R.id.address);
+        final EditText phone = (EditText) findViewById(R.id.phone);
+
+        cammera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dispatchTakePictureIntent();
+                cammera.setImageURI(imageUri);
+            }
+        });
+
+        pluses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String plusesName = String.valueOf(name.getText());
+                String pluseAddress = String.valueOf(address.getText());
+                String plusesPhone = String.valueOf(phone.getText());
+
+                Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);
+                intent.putExtra("plusesName", plusesName);
+                intent.putExtra("plusesAddress", pluseAddress);
+                intent.putExtra("plusesPhone", plusesPhone);
+                intent.putExtra("imageURI", imageUri);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private String currentDateFormat(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HH_mm_ss");
+        String  currentTimeStamp = dateFormat.format(new Date());
+        return currentTimeStamp;
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            //1. 카메라 앱으로 찍은 이미지를 저장할 파일 객체 생성
+            mPhotoFileName = "IMG"+currentDateFormat()+".jpg";
+            mPhotoFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), mPhotoFileName);
+            if (mPhotoFile !=null) {
+                //2. 생성된 파일 객체에 대한 Uri 객체를 얻기
+                imageUri = FileProvider.getUriForFile(this, "com.hansung.teamproject.homework1", mPhotoFile);
+                //3. Uri 객체를 Extras를 통해 카메라 앱으로 전달
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            } else
+                Toast.makeText(getApplicationContext(), "file null", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            if (mPhotoFileName != null) {
+                mPhotoFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), mPhotoFileName);
+
+                ImageButton cammera = (ImageButton) findViewById(R.id.cammraBtn);
+                cammera.setImageURI(Uri.fromFile(mPhotoFile));
+
+                // 파일 추가
+                File saveFile = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                File[] files = saveFile.listFiles();
+                if (files != null) {
+                    for (File f : files) {
+                        Log.i("Save_pictures", "File name = " + f.getName());
+                        Log.i("Save_pictures_path", "Picture_path = " + f.getPath());
+                        Uri.parse("files://" + Environment.getExternalStorageDirectory().getPath() + "/Pictures/" + f.getName());
+                    }
+                }
+            }
+        }
+    }
+
+    /// 권환 확인
+    private void checkDangerousPermissions() {
+        String[] permissions = {
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        };
+
+        int permissionCheck = PackageManager.PERMISSION_GRANTED;
+        for (int i = 0; i < permissions.length; i++) {
+            permissionCheck = ContextCompat.checkSelfPermission(this, permissions[i]);
+            if (permissionCheck == PackageManager.PERMISSION_DENIED) {
+                break;
+            }
+        }
+
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_EXTERNAL_STORAGE_FOR_MULTIMEDIA);
+        }
+    }
+}
