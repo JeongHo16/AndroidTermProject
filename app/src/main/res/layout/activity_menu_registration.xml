@@ -14,7 +14,8 @@
         <ImageButton
             android:layout_width="130dp"
             android:layout_height="130dp"
-            android:id="@+id/restaurantimage"/>
+            android:src="@drawable/ic_linked_camera_black_24dp"
+            android:id="@+id/menuimage"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

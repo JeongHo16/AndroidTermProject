@@ -70,13 +70,13 @@ public class RestaurantDetailActivity extends AppCompatActivity {
 
 
 
-  /*      imageView.setImageURI(Uri.parse(imageURI));
+         imageView.setImageURI(Uri.parse(imageURI));
         if(textView_title != null)
             textView_title.setText(title);
         if(textView_address != null)
             textView_address.setText(address);
         if(textView_phone != null)
-            textView_phone.setText(phone);*/
+            textView_phone.setText(phone);
 
         data.add(new MyItem(R.drawable.noodle_soup, "손칼국수", "5.000", "4.5"));
         data.add(new MyItem(R.drawable.bossam_formality, "보쌈 정식", "7.000", "4.0"));
