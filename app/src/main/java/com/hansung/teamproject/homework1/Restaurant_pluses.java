@@ -30,8 +30,8 @@ import java.util.Date;
 public class Restaurant_pluses extends AppCompatActivity{
 
     final int REQUEST_EXTERNAL_STORAGE_FOR_MULTIMEDIA = 1;
-    static File mPhotoFile;
-    static String mPhotoFileName;
+    File mPhotoFile;
+    String mPhotoFileName;
     final int REQUEST_IMAGE_CAPTURE = 100;
     Uri imageUri;
 
