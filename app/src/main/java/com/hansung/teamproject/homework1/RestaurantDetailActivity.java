@@ -10,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -41,7 +44,7 @@ public class RestaurantDetailActivity extends AppCompatActivity {
         Log.i("intent", "title = " + title);
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
-//        imageView.setImageURI(Uri.parse(imageURI));
+        imageView.setImageURI(Uri.parse(imageURI));
 
         TextView textView_title = (TextView) findViewById(R.id.title);
         if(textView_title != null)
@@ -94,4 +97,22 @@ public class RestaurantDetailActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.resdetail_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.add:
+                    startActivity(new Intent(this, MenuRegistrationActivity.class));
+                    return true;
+
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+    }
 }
