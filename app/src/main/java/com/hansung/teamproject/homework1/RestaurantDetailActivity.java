@@ -9,9 +9,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,6 +30,30 @@ public class RestaurantDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_restaurant_detail);
 
         ArrayList<MyItem> data = new ArrayList<MyItem>();
+
+        Intent intent = getIntent();     // 인텐트 넘겨 받기
+        String title, phone, address, imageURI;
+
+        title = intent.getStringExtra("plusesName");
+        address = intent.getStringExtra("plusesAddress");
+        phone = intent.getStringExtra("plusesPhone");
+        imageURI = intent.getStringExtra("imageURI");
+        Log.i("intent", "title = " + title);
+
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+//        imageView.setImageURI(Uri.parse(imageURI));
+
+        TextView textView_title = (TextView) findViewById(R.id.title);
+        if(textView_title != null)
+            textView_title.setText(title);
+
+        TextView textView_address = (TextView) findViewById(R.id.address);
+        if(textView_address != null)
+            textView_address.setText(address);
+
+        TextView textView_phone = (TextView) findViewById(R.id.phonenumber);
+        if(textView_phone != null)
+            textView_phone.setText(phone);
 
         data.add(new MyItem(R.drawable.noodle_soup, "손칼국수", "5.000", "4.5"));
         data.add(new MyItem(R.drawable.bossam_formality, "보쌈 정식", "7.000", "4.0"));

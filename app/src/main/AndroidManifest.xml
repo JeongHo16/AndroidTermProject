@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".RestaurantDetailActivity">
             <intent-filter>
-                <action android:name="android.intent.categry.DEFAULT"/>
+                <action android:name="android.intent.categry.DEFAULT"/>         // 인텐트 넘겨받기
             </intent-filter>
         </activity>
 
@@ -26,7 +26,7 @@
 
         <activity android:name=".Restaurant_pluses">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN" />        // 시작 엑티비티
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -40,7 +40,7 @@ public class Restaurant_pluses extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant_pluses);
 
-        checkDangerousPermissions();
+        checkDangerousPermissions();        // 파일 권한 확인 - 읽기, 쓰기
 
         final ImageView cammera = (ImageButton) findViewById(R.id.cammraBtn);
         Button pluses = (Button) findViewById(R.id.pluses);
@@ -49,11 +49,11 @@ public class Restaurant_pluses extends AppCompatActivity{
         final EditText address = (EditText) findViewById(R.id.address);
         final EditText phone = (EditText) findViewById(R.id.phone);
 
-        cammera.setOnClickListener(new View.OnClickListener() {
+        cammera.setOnClickListener(new View.OnClickListener() {             // 카메라 눌렀을 경우 동작
             @Override
             public void onClick(View v) {
-                dispatchTakePictureIntent();
-                cammera.setImageURI(imageUri);
+                dispatchTakePictureIntent();                // 카메라 사진 찍기
+                cammera.setImageURI(imageUri);              // 찍은 카메라 uri 넘기기
             }
         });
 
@@ -63,13 +63,14 @@ public class Restaurant_pluses extends AppCompatActivity{
                 String plusesName = String.valueOf(name.getText());
                 String pluseAddress = String.valueOf(address.getText());
                 String plusesPhone = String.valueOf(phone.getText());
+                String plusesImageUri = String.valueOf(imageUri);
 
-                Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);        // 인텐트 선언
                 intent.putExtra("plusesName", plusesName);
                 intent.putExtra("plusesAddress", pluseAddress);
                 intent.putExtra("plusesPhone", plusesPhone);
-                intent.putExtra("imageURI", imageUri);
-                startActivity(intent);
+                intent.putExtra("imageURI", plusesImageUri);
+                startActivity(intent);                  //인텐트 넘기기
             }
         });
     }
@@ -80,7 +81,7 @@ public class Restaurant_pluses extends AppCompatActivity{
         return currentTimeStamp;
     }
 
-    private void dispatchTakePictureIntent() {
+    private void dispatchTakePictureIntent() {      // 카메라 찍기
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
