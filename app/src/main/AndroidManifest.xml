@@ -12,17 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".RestaurantDetailActivity">
             <intent-filter>
                 <action android:name="android.intent.categry.DEFAULT"/>         // 인텐트 넘겨받기
             </intent-filter>
         </activity>
 
-
         <activity android:name=".MenuDetailActivity"
             android:parentActivityName=".RestaurantDetailActivity">
         </activity>
-
 
         <activity android:name=".Restaurant_pluses">
             <intent-filter>
@@ -36,7 +35,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 
         <provider
             android:name="android.support.v4.content.FileProvider"
