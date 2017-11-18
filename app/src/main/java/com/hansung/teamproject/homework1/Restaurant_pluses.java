@@ -42,18 +42,18 @@ public class Restaurant_pluses extends AppCompatActivity{
 
         checkDangerousPermissions();        // 파일 권한 확인 - 읽기, 쓰기
 
-        final ImageView cammera = (ImageButton) findViewById(R.id.cammraBtn);
+        final ImageView camera = (ImageButton) findViewById(R.id.cameraBtn);
         Button pluses = (Button) findViewById(R.id.pluses);
 
         final EditText name = (EditText) findViewById(R.id.name);
         final EditText address = (EditText) findViewById(R.id.address);
         final EditText phone = (EditText) findViewById(R.id.phone);
 
-        cammera.setOnClickListener(new View.OnClickListener() {             // 카메라 눌렀을 경우 동작
+        camera.setOnClickListener(new View.OnClickListener() {             // 카메라 눌렀을 경우 동작
             @Override
             public void onClick(View v) {
                 dispatchTakePictureIntent();                // 카메라 사진 찍기
-                cammera.setImageURI(imageUri);              // 찍은 카메라 uri 넘기기
+                camera.setImageURI(imageUri);              // 찍은 카메라 uri 넘기기
             }
         });
 
@@ -61,13 +61,13 @@ public class Restaurant_pluses extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 String plusesName = String.valueOf(name.getText());
-                String pluseAddress = String.valueOf(address.getText());
+                String plusesAddress = String.valueOf(address.getText());
                 String plusesPhone = String.valueOf(phone.getText());
                 String plusesImageUri = String.valueOf(imageUri);
 
                 Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);        // 인텐트 선언
                 intent.putExtra("plusesName", plusesName);
-                intent.putExtra("plusesAddress", pluseAddress);
+                intent.putExtra("plusesAddress", plusesAddress);
                 intent.putExtra("plusesPhone", plusesPhone);
                 intent.putExtra("imageURI", plusesImageUri);
                 startActivity(intent);                  //인텐트 넘기기
@@ -104,8 +104,8 @@ public class Restaurant_pluses extends AppCompatActivity{
             if (mPhotoFileName != null) {
                 mPhotoFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), mPhotoFileName);
 
-                ImageButton cammera = (ImageButton) findViewById(R.id.cammraBtn);
-                cammera.setImageURI(Uri.fromFile(mPhotoFile));
+                ImageButton camera = (ImageButton) findViewById(R.id.cameraBtn);
+                camera.setImageURI(Uri.fromFile(mPhotoFile));
 
                 // 파일 추가
                 File saveFile = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
