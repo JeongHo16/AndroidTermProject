@@ -30,8 +30,8 @@ import java.util.Date;
 public class Restaurant_pluses extends AppCompatActivity{
 
     final int REQUEST_EXTERNAL_STORAGE_FOR_MULTIMEDIA = 1;
-    static File mPhotoFile;
-    static String mPhotoFileName;
+    private File mPhotoFile;
+    private String mPhotoFileName;
     final int REQUEST_IMAGE_CAPTURE = 100;
     Uri imageUri;
 
@@ -53,7 +53,6 @@ public class Restaurant_pluses extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 dispatchTakePictureIntent();                // 카메라 사진 찍기
-                camera.setImageURI(imageUri);              // 찍은 카메라 uri 넘기기
             }
         });
 

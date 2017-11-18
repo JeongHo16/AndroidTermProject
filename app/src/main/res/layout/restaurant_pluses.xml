@@ -74,8 +74,6 @@
 
         </LinearLayout>
 
-
-
     <Button
         android:id="@+id/pluses"
         android:layout_width="match_parent"
