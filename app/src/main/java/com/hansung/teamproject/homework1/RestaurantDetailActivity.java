@@ -98,14 +98,14 @@ public class RestaurantDetailActivity extends AppCompatActivity {
         }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {// 강의자료 코드 참고
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.resdetail_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {// 강의자료 코드 참고
+    public boolean onOptionsItemSelected(MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.add:
                     startActivity(new Intent(this, MenuRegistrationActivity.class));
