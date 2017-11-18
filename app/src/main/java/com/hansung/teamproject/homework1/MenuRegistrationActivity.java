@@ -9,25 +9,42 @@ import android.widget.ImageButton;
 
 public class MenuRegistrationActivity extends AppCompatActivity {
 
+    EditText menuTitle;
+    EditText menuPrice;
+    EditText menuDescription;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_registration);
 
-        EditText menutitle = (EditText)findViewById(R.id.menutitle);
-        menutitle.setText("메뉴 제목 등록");
-        EditText menuprice = (EditText)findViewById(R.id.menuprice);
-        menuprice.setText("메뉴 가격 등록");
-        EditText menudescription = (EditText)findViewById(R.id.menudescription);
-        menudescription.setText("메뉴 설명 등록");
+        menuTitle = (EditText)findViewById(R.id.menutitle);
+        menuTitle.setText("메뉴 제목 등록");
+        menuPrice = (EditText)findViewById(R.id.menuprice);
+        menuPrice.setText("메뉴 가격 등록");
+        menuDescription = (EditText)findViewById(R.id.menudescription);
+        menuDescription.setText("메뉴 설명 등록");
 
-        ImageButton restaurantimage = (ImageButton)findViewById(R.id.restaurantimage);
-        restaurantimage.setOnClickListener(new View.OnClickListener() {
+        ImageButton restaurantImage = (ImageButton)findViewById(R.id.restaurantimage);
+        restaurantImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
             }
         });
+
+        Button menuAdd = (Button)findViewById(R.id.menuadd);
+        menuAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuSaveToDB();
+            }
+        });
+    }
+
+    private void menuSaveToDB() {
+
     }
 
 

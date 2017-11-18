@@ -14,19 +14,17 @@
             android:id="@+id/cammraBtn"
             android:layout_width="130dp"
             android:layout_height="130dp"
-            android:layout_weight="1"
             android:src="@drawable/ic_linked_camera_black_24dp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+
+    <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
@@ -59,7 +57,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
@@ -72,9 +69,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
-        </LinearLayout>
 
     </LinearLayout>
+
+        </LinearLayout>
+
+
 
     <Button
         android:id="@+id/pluses"
