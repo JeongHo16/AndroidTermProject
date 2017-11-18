@@ -3,6 +3,7 @@ package com.hansung.teamproject.homework1;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -34,6 +35,9 @@ public class Restaurant_pluses extends AppCompatActivity{
     String mPhotoFileName;
     final int REQUEST_IMAGE_CAPTURE = 100;
     Uri imageUri;
+    ResHelper  resHelper = new ResHelper(this);
+    Cursor cursor = resHelper.getAllUsersBySQL();
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +57,6 @@ public class Restaurant_pluses extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 dispatchTakePictureIntent();                // 카메라 사진 찍기
-                camera.setImageURI(imageUri);              // 찍은 카메라 uri 넘기기
             }
         });
 
@@ -64,6 +67,19 @@ public class Restaurant_pluses extends AppCompatActivity{
                 String plusesAddress = String.valueOf(address.getText());
                 String plusesPhone = String.valueOf(phone.getText());
                 String plusesImageUri = String.valueOf(imageUri);
+
+                while(cursor.moveToNext()){     // cursor가 움직이면서 입력된 가게이름과 같은게 있는지 확인하고 있으면 count ++
+                    if(cursor.getString(1).equals(plusesName)){
+                        count ++;
+                        break;
+                    }
+                }
+                if(count == 0){             //cursor가 만약 0이면 그대로 db에 입력해주기
+                    long insertmsg = resHelper.insertUserByMethod(plusesImageUri, plusesName, plusesAddress, plusesPhone);
+                    Toast.makeText(getApplicationContext(), insertmsg + "DBinsert", Toast.LENGTH_SHORT).show();
+                }else{
+                    count = 0;
+                }
 
                 Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);        // 인텐트 선언
                 intent.putExtra("plusesName", plusesName);

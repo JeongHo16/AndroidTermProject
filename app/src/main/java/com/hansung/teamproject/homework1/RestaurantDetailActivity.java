@@ -28,8 +28,6 @@ import java.util.ArrayList;
 
 public class RestaurantDetailActivity extends AppCompatActivity {
 
-    private ResHelper resHelper;
-    int count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,31 +42,11 @@ public class RestaurantDetailActivity extends AppCompatActivity {
         address = intent.getStringExtra("plusesAddress");
         phone = intent.getStringExtra("plusesPhone");
         imageURI = intent.getStringExtra("imageURI");
-        Log.i("intent", "title = " + title);
-
-        resHelper = new ResHelper(this);
-        Cursor cursor = resHelper.getAllUsersBySQL();
-
-        while(cursor.moveToNext()){     // db 접근하여 같은게 있는지 확인(가게 이름만)
-            if(cursor.getString(1).equals(title)){
-                count ++;
-                break;
-            }
-        }
-        if(count == 0){         // 같은게 없는경우 저장 후 토스메세지 보내기
-            long insertmsg = resHelper.insertUserByMethod(imageURI, title, address, phone);
-            Toast.makeText(this, insertmsg + "DBinsert", Toast.LENGTH_SHORT).show();
-        }else{
-            count = 0;
-        }
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         TextView textView_title = (TextView) findViewById(R.id.title);
         TextView textView_address = (TextView) findViewById(R.id.address);
         TextView textView_phone = (TextView) findViewById(R.id.phonenumber);
-
-
-
 
          imageView.setImageURI(Uri.parse(imageURI));
         if(textView_title != null)
