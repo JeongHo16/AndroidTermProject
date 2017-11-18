@@ -1,6 +1,7 @@
 package com.hansung.teamproject.homework1;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -27,6 +28,8 @@ import java.util.ArrayList;
 
 public class RestaurantDetailActivity extends AppCompatActivity {
 
+    private ResHelper resHelper;
+    int count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,20 +46,37 @@ public class RestaurantDetailActivity extends AppCompatActivity {
         imageURI = intent.getStringExtra("imageURI");
         Log.i("intent", "title = " + title);
 
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-        imageView.setImageURI(Uri.parse(imageURI));
+        resHelper = new ResHelper(this);
+        Cursor cursor = resHelper.getAllUsersBySQL();
 
+        while(cursor.moveToNext()){     // db 접근하여 같은게 있는지 확인(가게 이름만)
+            if(cursor.getString(1).equals(title)){
+                count ++;
+                break;
+            }
+        }
+        if(count == 0){         // 같은게 없는경우 저장 후 토스메세지 보내기
+            long insertmsg = resHelper.insertUserByMethod(imageURI, title, address, phone);
+            Toast.makeText(this, insertmsg + "DBinsert", Toast.LENGTH_SHORT).show();
+        }else{
+            count = 0;
+        }
+
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
         TextView textView_title = (TextView) findViewById(R.id.title);
+        TextView textView_address = (TextView) findViewById(R.id.address);
+        TextView textView_phone = (TextView) findViewById(R.id.phonenumber);
+
+
+
+
+  /*      imageView.setImageURI(Uri.parse(imageURI));
         if(textView_title != null)
             textView_title.setText(title);
-
-        TextView textView_address = (TextView) findViewById(R.id.address);
         if(textView_address != null)
             textView_address.setText(address);
-
-        TextView textView_phone = (TextView) findViewById(R.id.phonenumber);
         if(textView_phone != null)
-            textView_phone.setText(phone);
+            textView_phone.setText(phone);*/
 
         data.add(new MyItem(R.drawable.noodle_soup, "손칼국수", "5.000", "4.5"));
         data.add(new MyItem(R.drawable.bossam_formality, "보쌈 정식", "7.000", "4.0"));
