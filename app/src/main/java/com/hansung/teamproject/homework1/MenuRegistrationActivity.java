@@ -101,13 +101,13 @@ public class MenuRegistrationActivity extends AppCompatActivity {
         startActivity(intent);  // 인텐트 보내줌(어떤 가게인지)
     }
 
-    private String currentDateFormat() {
+    private String currentDateFormat() { //10주차 실습 참고 코드
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HH_mm_ss");
         String currentTimeStamp = dateFormat.format(new Date());
         return currentTimeStamp;
     }
 
-    private void dispatchTakePictureIntent() {      // 카메라 찍기
+    private void dispatchTakePictureIntent() {      // 카메라 찍기 //10주차 실습 참고 코드
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -125,7 +125,7 @@ public class MenuRegistrationActivity extends AppCompatActivity {
         }
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) { //10주차 실습 참고 코드
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             if (mPhotoFileName != null) {
                 mPhotoFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), mPhotoFileName);

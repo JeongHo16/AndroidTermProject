@@ -7,98 +7,10 @@
     android:orientation="vertical"
     tools:context="com.hansung.teamproject.homework1.RestaurantDetailActivity">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
-            android:gravity="center_horizontal"
-            android:padding="8dp"
-            android:text="@string/title"
-            android:textSize="28dp"
-            android:id="@+id/title"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_green_light"
-            android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="90dp"
-                    android:layout_height="80dp"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/titleboard" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="5dp"
-                            android:text="@string/address"
-                            android:textColor="@android:color/black"
-                            android:textSize="18dp"
-                            android:id="@+id/address"/>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center_vertical"
-                                    android:text="@string/phonenumber"
-                                    android:id="@+id/phonenumber"
-                                    android:textColor="@color/colorAccent"
-                                    android:textSize="17dp" />
-
-                                <ImageButton
-                                    android:id="@+id/imageButton"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="10dp"
-                                    android:onClick="call"
-                                    android:padding="0dp"
-                                    android:src="@drawable/phoneicon" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="5dp"
-                            android:text="@string/time"
-                            android:textColor="@android:color/black"
-                            android:textSize="18dp" />
-                </LinearLayout>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_orange_light"
-            android:paddingLeft="8dp"
-            android:text="메뉴"
-            android:textColor="@android:color/black"
-            android:textSize="15dp" />
-
-        <ListView
-            android:id="@+id/list_item"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.hansung.teamproject.homework1.RestaurantDetailFragment"
+        android:id="@+id/resdetail" />
 
 </LinearLayout>

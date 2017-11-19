@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class MenuHelper extends SQLiteOpenHelper {
+public class MenuHelper extends SQLiteOpenHelper { //DB 강의자료 참고코드
     final static String TAG="MenuHelper";
 
     public MenuHelper(Context context) {

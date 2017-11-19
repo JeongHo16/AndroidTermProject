@@ -1,6 +1,7 @@
 package com.hansung.teamproject.homework1;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -26,10 +27,19 @@ public class MenuDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_menu_detail);
 
-        Intent intent = getIntent();
+        if(getResources().getConfiguration().orientation //프래그먼트 실습 참고 코드
+                == Configuration.ORIENTATION_LANDSCAPE) {
+            finish();
+            return;
+        }
+
+        MenuDetailFragment details = new MenuDetailFragment();//프래그먼트 실습 참고 코드
+        details.setSelection(getIntent().getIntExtra("index", -1));
+        getSupportFragmentManager().beginTransaction().replace(R.id.menudetails, details).commit();
+
+        Intent intent = getIntent(); //리스트뷰로 부터온 인텐트 받기
         String name = intent.getStringExtra("name");
         String price = intent.getStringExtra("price");
         String menuimage = intent.getStringExtra("menuimage");
@@ -52,7 +62,7 @@ public class MenuDetailActivity extends AppCompatActivity {
             pointView.setText("설명: "+description);
         }
 
-        ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar(); //액션바 실습 참고 코드
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             Drawable drawable = getDrawable(R.drawable.ic_keyboard_arrow_left_black_24dp);
@@ -61,6 +71,5 @@ public class MenuDetailActivity extends AppCompatActivity {
                 actionBar.setHomeAsUpIndicator(drawable);
             }
         }
-
     }
 }
