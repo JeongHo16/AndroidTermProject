@@ -28,17 +28,18 @@ public class MenuHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertUserBySQL(String image, String title, String price, String description) {
+    public void insertUserBySQL(String restitle, String image, String title, String price, String description) {
         try {
             String sql = String.format (
-                    "INSERT INTO %s (%s, %s, %s, %s, %s) VALUES (NULL, '%s', '%s', '%s', '%s')",
+                    "INSERT INTO %s (%s, %s, %s, %s, %s, %s) VALUES (NULL,'%s', '%s', '%s', '%s', '%s')",
                     MenuRegistration.Menu.TABLE_NAME,
                     MenuRegistration.Menu._ID,
+                    MenuRegistration.Menu.KEY_RESTITLE,
                     MenuRegistration.Menu.KEY_IMAGE,
                     MenuRegistration.Menu.KEY_TITLE,
                     MenuRegistration.Menu.KEY_PRICE,
                     MenuRegistration.Menu.KEY_DESCRIPTION,
-                    image, title, price, description);
+                    restitle, image, title, price, description);
 
             getWritableDatabase().execSQL(sql);
         } catch (SQLException e) {
@@ -64,11 +65,12 @@ public class MenuHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void updateUserBySQL(String _id, String image, String title, String price, String description) {
+    public void updateUserBySQL(String _id, String restitle, String image, String title, String price, String description) {
         try {
             String sql = String.format (
-                    "UPDATE  %s SET %s = '%s', %s = '%s', %s = '%s', %s = '%s' WHERE %s = %s",
+                    "UPDATE  %s SET %s = '%s', %s = '%s', %s = '%s', %s = '%s', %s = '%s' WHERE %s = %s",
                     MenuRegistration.Menu.TABLE_NAME,
+                    MenuRegistration.Menu.KEY_RESTITLE, restitle,
                     MenuRegistration.Menu.KEY_IMAGE, image,
                     MenuRegistration.Menu.KEY_TITLE, title,
                     MenuRegistration.Menu.KEY_PRICE, price,
@@ -80,9 +82,10 @@ public class MenuHelper extends SQLiteOpenHelper {
         }
     }
 
-    public long insertUserByMethod(String image, String title, String price, String description) {
+    public long insertUserByMethod(String restitle, String image, String title, String price, String description) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(MenuRegistration.Menu.KEY_RESTITLE, restitle);
         values.put(MenuRegistration.Menu.KEY_IMAGE, image);
         values.put(MenuRegistration.Menu.KEY_TITLE, title);
         values.put(MenuRegistration.Menu.KEY_PRICE, price);
@@ -105,10 +108,11 @@ public class MenuHelper extends SQLiteOpenHelper {
         return db.delete(MenuRegistration.Menu.TABLE_NAME, whereClause, whereArgs);
     }
 
-    public long updateUserByMethod(String _id, String image, String title, String price, String description) {
+    public long updateUserByMethod(String restitle, String _id, String image, String title, String price, String description) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(MenuRegistration.Menu.KEY_RESTITLE, restitle);
         values.put(MenuRegistration.Menu.KEY_IMAGE, image);
         values.put(MenuRegistration.Menu.KEY_TITLE, title);
         values.put(MenuRegistration.Menu.KEY_PRICE, price);

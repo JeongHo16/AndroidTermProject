@@ -16,6 +16,7 @@ public final class MenuRegistration { //9주차 실습과제의 참고코드
     /* Inner class that defines the table contents */
     public static class Menu implements BaseColumns {
         public static final String TABLE_NAME="Menu";
+        public static final String KEY_RESTITLE = "Restitle";
         public static final String KEY_IMAGE = "Image";
         public static final String KEY_TITLE = "Title";
         public static final String KEY_PRICE = "Price";
@@ -23,6 +24,7 @@ public final class MenuRegistration { //9주차 실습과제의 참고코드
 
         public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " (" +
                 _ID + " INTEGER PRIMARY KEY" + COMMA_SEP +
+                KEY_RESTITLE + TEXT_TYPE + COMMA_SEP +
                 KEY_IMAGE + IMAGE_TYPE + COMMA_SEP +
                 KEY_TITLE + TEXT_TYPE + COMMA_SEP +
                 KEY_PRICE + TEXT_TYPE + COMMA_SEP +
