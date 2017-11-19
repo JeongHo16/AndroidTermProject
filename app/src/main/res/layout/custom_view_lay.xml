@@ -32,6 +32,7 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:gravity="right"
+        android:paddingRight="10dp"
         android:text="price"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18dp" />

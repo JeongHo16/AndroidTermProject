@@ -140,7 +140,7 @@ public class Restaurant_pluses extends AppCompatActivity{
         }
     }
 
-    /// 권환 확인
+    /// 권한 확인
     private void checkDangerousPermissions() {
         String[] permissions = {
                 Manifest.permission.READ_EXTERNAL_STORAGE,

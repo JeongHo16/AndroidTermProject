@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +32,7 @@ public class MenuDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         String price = intent.getStringExtra("price");
-        int image = intent.getIntExtra("image", 0);
+        String menuimage = intent.getStringExtra("menuimage");
         String description = intent.getStringExtra("description");
 
         if(name != null) {
@@ -42,13 +43,13 @@ public class MenuDetailActivity extends AppCompatActivity {
             TextView priceView = (TextView) findViewById(R.id.view_prise);
             priceView.setText(price+"원");
         }
-        if(image != 0){
+        if(menuimage != null){
             ImageView imageView = (ImageView) findViewById(R.id.view_image);
-            imageView.setImageResource(image);
+            imageView.setImageURI(Uri.parse(menuimage));
         }
         if(description != null){
             TextView pointView = (TextView) findViewById(R.id.view_point);
-            pointView.setText("설명:"+description);
+            pointView.setText("설명: "+description);
         }
 
         ActionBar actionBar = getSupportActionBar();

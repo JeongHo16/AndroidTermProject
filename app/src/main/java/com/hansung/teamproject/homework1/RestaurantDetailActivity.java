@@ -35,14 +35,14 @@ public class RestaurantDetailActivity extends AppCompatActivity {
     TextView textView_address;
     TextView textView_phone;
 
-    ResHelper resHelper;
-    MenuHelper menuHelper;
+    private ResHelper resHelper;
+    private MenuHelper menuHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_detail);
 
-        ArrayList<MyItem> data = new ArrayList<MyItem>();
+        menuHelper = new MenuHelper(this);
 
         resHelper = new ResHelper(this);
         Cursor cursor = resHelper.getAllUsersBySQL();
@@ -75,73 +75,52 @@ public class RestaurantDetailActivity extends AppCompatActivity {
                 break;
             }
         }
-        //viewAllToListView();
 
-        /*data.add(new MyItem(R.drawable.noodle_soup, "손칼국수", "5.000", "4.5"));
-        data.add(new MyItem(R.drawable.bossam_formality, "보쌈 정식", "7.000", "4.0"));
-        data.add(new MyItem(R.drawable.bossam_m, "보쌈 중", "25.000", "4.1"));
-        data.add(new MyItem(R.drawable.bossam_l, "보쌈 대", "30.000", "3.7"));
-
-        final CustomAdapter adapter = new CustomAdapter(this, R.layout.custom_view_lay, data);
-
-        ListView listView = (ListView) findViewById(R.id.list_item);
-        listView.setAdapter(adapter);
-
-        listView.setDivider(new ColorDrawable(Color.BLACK));
-        listView.setDividerHeight(5);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                int imageView = ((MyItem)adapter.getItem(i)).image;
-                String menutitle = MenuRegistration.Menu.KEY_TITLE;
-                String menuprice = MenuRegistration.Menu.KEY_PRICE;
-                String menudescription = MenuRegistration.Menu.KEY_DESCRIPTION;
-
-                Intent intent = new Intent(getApplicationContext(), MenuDetailActivity.class);
-
-                intent.putExtra("name", menutitle);
-                intent.putExtra("price", menuprice);
-                intent.putExtra("image", imageView);
-                intent.putExtra("point", menudescription);
-                startActivity(intent);
-            }
-        });*/
+        viewAllToListView();
     }
 
-    /*private void viewAllToListView() {
-
+    private void viewAllToListView() { //9주차 실습과제 참고코드
         Cursor cursor = menuHelper.getAllUsersByMethod();
 
         android.widget.SimpleCursorAdapter adapter =
                 new android.widget.SimpleCursorAdapter(getApplicationContext(),
                         R.layout.custom_view_lay, cursor, new String[]{
                         MenuRegistration.Menu.KEY_IMAGE,
+                        MenuRegistration.Menu.KEY_TITLE,
                         MenuRegistration.Menu.KEY_PRICE},
-                        new int[]{R.id.Item_name, R.id.Item_price}, 0);
+                        new int[]{R.id.Item_image, R.id.Item_name, R.id.Item_price}, 0);
 
         ListView lv = (ListView)findViewById(R.id.list_item);
         lv.setAdapter(adapter);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Adapter adapter = adapterView.getAdapter();
 
-                mId.setText(((Cursor)adapter.getItem(i)).getString(0));
-                mName.setText(((Cursor)adapter.getItem(i)).getString(1));
-                mPhone.setText(((Cursor)adapter.getItem(i)).getString(2));
+                String menuimage = ((Cursor)adapter.getItem(i)).getString(2);
+                String menutitle = ((Cursor)adapter.getItem(i)).getString(3);
+                String menuprice = ((Cursor)adapter.getItem(i)).getString(4);
+                String menudescription = ((Cursor)adapter.getItem(i)).getString(5);
+
+                Intent intent = new Intent(getApplicationContext(), MenuDetailActivity.class);
+
+                intent.putExtra("menuimage", menuimage);
+                intent.putExtra("name", menutitle);
+                intent.putExtra("price", menuprice);
+                intent.putExtra("description", menudescription);
+                startActivity(intent);
             }
         });
         lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-    }*/
+    }
 
-        public void call(View v){
-            TextView textView = (TextView)findViewById(R.id.phonenumber);
-            String callNum = textView.getText().toString();
-            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+callNum));
-            startActivity(intent);
-        }
+    public void call(View v){
+        TextView textView = (TextView)findViewById(R.id.phonenumber);
+        String callNum = textView.getText().toString();
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+callNum));
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

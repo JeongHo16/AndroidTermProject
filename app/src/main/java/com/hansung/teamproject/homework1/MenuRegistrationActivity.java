@@ -78,8 +78,9 @@ public class MenuRegistrationActivity extends AppCompatActivity {
 
         while(cursor.moveToNext()){     // cursor가 움직이면서 입력된 메뉴이름과 같은게 있는지 확인하고 있으면 count ++
             Log.i("Cursor Log", cursor.getString(1));
-            if(cursor.getString(2).equals(menutitle)){
-                count ++;
+            if(cursor.getString(3).equals(menutitle)){
+                count++;
+                Toast.makeText(getApplicationContext(), "이미 등록된 메뉴입니다.", Toast.LENGTH_SHORT).show();
                 break;
             }
         }
