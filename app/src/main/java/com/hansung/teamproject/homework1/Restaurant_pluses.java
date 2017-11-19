@@ -36,7 +36,6 @@ public class Restaurant_pluses extends AppCompatActivity{
     final int REQUEST_IMAGE_CAPTURE = 100;
     Uri imageUri;
     ResHelper  resHelper = new ResHelper(this);
-    Cursor cursor = resHelper.getAllUsersBySQL();
     int count = 0;
 
     @Override
@@ -67,9 +66,11 @@ public class Restaurant_pluses extends AppCompatActivity{
                 String plusesAddress = String.valueOf(address.getText());
                 String plusesPhone = String.valueOf(phone.getText());
                 String plusesImageUri = String.valueOf(imageUri);
+                Cursor cursor = resHelper.getAllUsersBySQL();
 
                 while(cursor.moveToNext()){     // cursor가 움직이면서 입력된 가게이름과 같은게 있는지 확인하고 있으면 count ++
-                    if(cursor.getString(1).equals(plusesName)){
+                    Log.i("Cursor Log", cursor.getString(1));
+                    if(cursor.getString(2).equals(plusesName)){
                         count ++;
                         break;
                     }
