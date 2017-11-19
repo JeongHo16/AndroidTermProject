@@ -28,6 +28,8 @@ import java.util.ArrayList;
 
 public class RestaurantDetailActivity extends AppCompatActivity {
 
+    ResHelper  resHelper = new ResHelper(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,27 +37,28 @@ public class RestaurantDetailActivity extends AppCompatActivity {
 
         ArrayList<MyItem> data = new ArrayList<MyItem>();
 
+        Cursor cursor = resHelper.getAllUsersBySQL();
+
         Intent intent = getIntent();     // 인텐트 넘겨 받기
         String title, phone, address, imageURI;
 
         title = intent.getStringExtra("plusesName");
-        address = intent.getStringExtra("plusesAddress");
-        phone = intent.getStringExtra("plusesPhone");
-        imageURI = intent.getStringExtra("imageURI");
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         TextView textView_title = (TextView) findViewById(R.id.title);
         TextView textView_address = (TextView) findViewById(R.id.address);
         TextView textView_phone = (TextView) findViewById(R.id.phonenumber);
 
-        if(imageURI != null)
-            imageView.setImageURI(Uri.parse(imageURI));
-        if(textView_title != null)
-            textView_title.setText(title);
-        if(textView_address != null)
-            textView_address.setText(address);
-        if(textView_phone != null)
-            textView_phone.setText(phone);
+        while(cursor.moveToNext()){
+            Log.i("getIntent_title", cursor.getString(2));
+            if(cursor.getString(2).equals(title)){
+                imageView.setImageURI(Uri.parse(cursor.getString(1)));
+                textView_title.setText(cursor.getString(2));
+                textView_address.setText(cursor.getString(3));
+                textView_phone.setText(cursor.getString(4));
+                break;
+            }
+        }
 
         data.add(new MyItem(R.drawable.noodle_soup, "손칼국수", "5.000", "4.5"));
         data.add(new MyItem(R.drawable.bossam_formality, "보쌈 정식", "7.000", "4.0"));
@@ -107,6 +110,9 @@ public class RestaurantDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.add:
+                    TextView textView_title = (TextView) findViewById(R.id.title);
+                    Intent intent = new Intent(getApplicationContext(), MenuRegistrationActivity.class);        // 인텐트 선언
+                    intent.putExtra("plusesName", textView_title.getText());
                     startActivity(new Intent(this, MenuRegistrationActivity.class));
                     return true;
 

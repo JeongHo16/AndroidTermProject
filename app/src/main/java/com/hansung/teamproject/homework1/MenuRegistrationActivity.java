@@ -29,6 +29,7 @@ public class MenuRegistrationActivity extends AppCompatActivity {
     EditText menuPrice;
     EditText menuDescription;
 
+    String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,9 @@ public class MenuRegistrationActivity extends AppCompatActivity {
         menuTitle = (EditText) findViewById(R.id.menutitle);
         menuPrice = (EditText) findViewById(R.id.menuprice);
         menuDescription = (EditText) findViewById(R.id.menudescription);
+
+        Intent intent = getIntent();
+        title= intent.getStringExtra("plusesName");
 
         ImageView menuImage = (ImageButton) findViewById(R.id.menuimage);
         menuImage.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +55,8 @@ public class MenuRegistrationActivity extends AppCompatActivity {
         menuAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);
+                intent.putExtra("plusesName", title);
                 menuSaveToDB();
             }
         });
