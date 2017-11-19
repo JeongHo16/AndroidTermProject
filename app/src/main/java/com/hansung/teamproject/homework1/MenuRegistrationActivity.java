@@ -55,8 +55,9 @@ public class MenuRegistrationActivity extends AppCompatActivity {
         menuAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);
-                intent.putExtra("plusesName", title);
+                Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);        // 인텐트 넘겨주기
+                intent.putExtra("plusesName", title);                           // 데이터 넣기
+                setResult(RESULT_OK, intent);
                 menuSaveToDB();
             }
         });

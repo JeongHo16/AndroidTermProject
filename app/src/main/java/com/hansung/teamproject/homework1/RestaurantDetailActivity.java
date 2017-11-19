@@ -40,7 +40,7 @@ public class RestaurantDetailActivity extends AppCompatActivity {
         Cursor cursor = resHelper.getAllUsersBySQL();
 
         Intent intent = getIntent();     // 인텐트 넘겨 받기
-        String title, phone, address, imageURI;
+        String title;
 
         title = intent.getStringExtra("plusesName");
 
@@ -108,16 +108,39 @@ public class RestaurantDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.add:
-                    TextView textView_title = (TextView) findViewById(R.id.title);
-                    Intent intent = new Intent(getApplicationContext(), MenuRegistrationActivity.class);        // 인텐트 선언
-                    intent.putExtra("plusesName", textView_title.getText());
-                    startActivity(new Intent(this, MenuRegistrationActivity.class));
-                    return true;
+        switch (item.getItemId()) {
+            case R.id.add:
+                TextView textView_title = (TextView) findViewById(R.id.title);
+                Intent intent = new Intent(getApplicationContext(), MenuRegistrationActivity.class);        // 인텐트 선언
+                intent.putExtra("plusesName", textView_title.getText());
+                startActivity(new Intent(this, MenuRegistrationActivity.class));
+                return true;
 
-                default:
-                    return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Cursor cursor = resHelper.getAllUsersBySQL();
+        String intentData = data.getStringExtra("plusesName");
+
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        TextView textView_title = (TextView) findViewById(R.id.title);
+        TextView textView_address = (TextView) findViewById(R.id.address);
+        TextView textView_phone = (TextView) findViewById(R.id.phonenumber);
+
+        while(cursor.moveToNext()){
+            if(cursor.getString(2).equals(intentData)){
+                imageView.setImageURI(Uri.parse(cursor.getString(1)));
+                textView_title.setText(cursor.getString(2));
+                textView_address.setText(cursor.getString(3));
+                textView_phone.setText(cursor.getString(4));
+                break;
             }
+
+        }
     }
 }
