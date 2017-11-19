@@ -42,7 +42,7 @@ public class RestaurantDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();     // 인텐트 넘겨 받기
         String title;
 
-        if(intent.getStringExtra("plusesNames") != null){
+        if(intent.getStringExtra("plusesNames") != null){       // 추가매뉴에서 인텐트 받아옴
             title = intent.getStringExtra("plusesNames");
             Log.i("titles", title + "");
         }

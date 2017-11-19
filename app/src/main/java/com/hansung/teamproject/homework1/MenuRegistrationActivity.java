@@ -57,7 +57,7 @@ public class MenuRegistrationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.i("onActivityResult_input", title + " ");
                 Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);        // 인텐트 넘겨주기
-                intent.putExtra("plusesNames", title);                           // 데이터 넣기
+                intent.putExtra("plusesNames", title);                           // 데이터 넣기 (가게이름)
                 setResult(RESULT_OK, intent);
                 menuSaveToDB(intent);
             }
@@ -65,7 +65,7 @@ public class MenuRegistrationActivity extends AppCompatActivity {
     }
 
     private void menuSaveToDB(Intent intent) {
-        startActivity(intent);
+        startActivity(intent);          // 인텐트 보내줌(어떤 가게인지)
     }
 
     private String currentDateFormat() {
