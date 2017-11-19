@@ -42,7 +42,15 @@ public class RestaurantDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();     // 인텐트 넘겨 받기
         String title;
 
-        title = intent.getStringExtra("plusesName");
+        if(intent.getStringExtra("plusesNames") != null){
+            title = intent.getStringExtra("plusesNames");
+            Log.i("titles", title + "");
+        }
+        else{
+            title = intent.getStringExtra("plusesName");
+            Log.i("title", title + "");
+            Log.i("titles", intent.getStringExtra("plusesNames") + "");
+        }
 
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         TextView textView_title = (TextView) findViewById(R.id.title);
@@ -113,7 +121,8 @@ public class RestaurantDetailActivity extends AppCompatActivity {
                 TextView textView_title = (TextView) findViewById(R.id.title);
                 Intent intent = new Intent(getApplicationContext(), MenuRegistrationActivity.class);        // 인텐트 선언
                 intent.putExtra("plusesName", textView_title.getText());
-                startActivity(new Intent(this, MenuRegistrationActivity.class));
+                Log.i("add_btn", textView_title.getText() + "");
+                startActivity(intent);
                 return true;
 
             default:
@@ -124,6 +133,9 @@ public class RestaurantDetailActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(data == null)
+            return;
+        Log.i("onActivityResult_output", "start");
         Cursor cursor = resHelper.getAllUsersBySQL();
         String intentData = data.getStringExtra("plusesName");
 
@@ -133,6 +145,7 @@ public class RestaurantDetailActivity extends AppCompatActivity {
         TextView textView_phone = (TextView) findViewById(R.id.phonenumber);
 
         while(cursor.moveToNext()){
+            Log.i("onActivityResult", intentData);
             if(cursor.getString(2).equals(intentData)){
                 imageView.setImageURI(Uri.parse(cursor.getString(1)));
                 textView_title.setText(cursor.getString(2));
@@ -140,7 +153,6 @@ public class RestaurantDetailActivity extends AppCompatActivity {
                 textView_phone.setText(cursor.getString(4));
                 break;
             }
-
         }
     }
 }

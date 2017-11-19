@@ -42,7 +42,7 @@ public class MenuRegistrationActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         title= intent.getStringExtra("plusesName");
-
+        Log.i("getTitle : ", title +" ");
         ImageView menuImage = (ImageButton) findViewById(R.id.menuimage);
         menuImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,16 +55,17 @@ public class MenuRegistrationActivity extends AppCompatActivity {
         menuAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i("onActivityResult_input", title + " ");
                 Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);        // 인텐트 넘겨주기
-                intent.putExtra("plusesName", title);                           // 데이터 넣기
+                intent.putExtra("plusesNames", title);                           // 데이터 넣기
                 setResult(RESULT_OK, intent);
-                menuSaveToDB();
+                menuSaveToDB(intent);
             }
         });
     }
 
-    private void menuSaveToDB() {
-        startActivity(new Intent(this, RestaurantDetailActivity.class));
+    private void menuSaveToDB(Intent intent) {
+        startActivity(intent);
     }
 
     private String currentDateFormat() {
