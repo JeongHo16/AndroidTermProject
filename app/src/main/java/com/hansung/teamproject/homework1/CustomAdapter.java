@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,7 @@ public class CustomAdapter extends BaseAdapter{
 
         TextView Text2 = (TextView) view.findViewById(R.id.Item_price);
 
-        Image.setImageResource(mData.get(i).image);
+        Image.setImageURI(Uri.parse(mData.get(i).image));
 
         Text1.setText(mData.get(i).name);
 
@@ -67,12 +68,12 @@ public class CustomAdapter extends BaseAdapter{
     }
 }
 class MyItem{
-    int image;
+    String image;
     String name;
     String price;
     String point;
 
-    public MyItem(int image, String name, String price, String point){
+    public MyItem(String image, String name, String price, String point){
         this.image = image;
         this.name = name;
         this.price = price;
