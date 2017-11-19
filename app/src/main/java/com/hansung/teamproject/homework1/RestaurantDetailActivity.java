@@ -1,6 +1,7 @@
 package com.hansung.teamproject.homework1;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -28,7 +29,7 @@ import android.widget.Toast;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RestaurantDetailActivity extends AppCompatActivity {
+public class RestaurantDetailActivity extends AppCompatActivity implements RestaurantDetailFragment.OnTitleSelectedListener {
 
     ImageView imageView;
     TextView textView_title;
@@ -76,7 +77,21 @@ public class RestaurantDetailActivity extends AppCompatActivity {
             }
         }
 
-        viewAllToListView();
+        //viewAllToListView();
+    }
+
+    public void onTitleSelected(int i) {
+        if (getResources().getConfiguration().orientation
+                == Configuration.ORIENTATION_LANDSCAPE) {
+            MenuDetailFragment detailsFragment = new MenuDetailFragment();
+            detailsFragment.setSelection(i);
+            getSupportFragmentManager().beginTransaction().replace(R.id.menudetails, detailsFragment).commit();
+        } else {
+            Intent intent = new Intent(this, MenuDetailActivity.class);
+            intent.putExtra("index", i);
+            startActivity(intent);
+
+        }
     }
 
     private void viewAllToListView() { //9주차 실습과제 참고코드
