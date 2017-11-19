@@ -48,7 +48,8 @@ public class RestaurantDetailActivity extends AppCompatActivity {
         TextView textView_address = (TextView) findViewById(R.id.address);
         TextView textView_phone = (TextView) findViewById(R.id.phonenumber);
 
-         imageView.setImageURI(Uri.parse(imageURI));
+        if(imageURI != null)
+            imageView.setImageURI(Uri.parse(imageURI));
         if(textView_title != null)
             textView_title.setText(title);
         if(textView_address != null)
