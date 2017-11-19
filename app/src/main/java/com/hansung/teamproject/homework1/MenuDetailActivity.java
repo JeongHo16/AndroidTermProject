@@ -1,7 +1,6 @@
 package com.hansung.teamproject.homework1;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -27,17 +26,8 @@ public class MenuDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_menu_detail);
-
-        if(getResources().getConfiguration().orientation
-                == Configuration.ORIENTATION_LANDSCAPE) {
-            finish();
-            return;
-        }
-
-        MenuDetailFragment details = new MenuDetailFragment();
-        details.setSelection(getIntent().getIntExtra("index", -1));
-        getSupportFragmentManager().beginTransaction().replace(R.id.menudetails, details).commit();
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");

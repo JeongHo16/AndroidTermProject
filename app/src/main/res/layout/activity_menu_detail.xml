@@ -7,10 +7,39 @@
     android:orientation="vertical"
     tools:context="com.hansung.teamproject.homework1.MenuDetailActivity">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/menudetails"></FrameLayout>
+    <ImageView
+        android:id="@+id/view_image"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="top|center"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/view_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="name"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/view_prise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="price"
+        android:textColor="@color/colorAccent"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/view_point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="point"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18dp" />
 
     
 
