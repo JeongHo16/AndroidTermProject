@@ -68,6 +68,7 @@ public class MenuRegistrationActivity extends AppCompatActivity {
     }
 
     private void menuSaveToDB() {
+        String restitle = title;
         String menutitle = String.valueOf(menuTitle.getText());
         String menuprice = String.valueOf(menuPrice.getText());
         String menudescription = String.valueOf(menuDescription.getText());
@@ -83,7 +84,7 @@ public class MenuRegistrationActivity extends AppCompatActivity {
             }
         }
         if(count == 0){             //count가 만약 0이면 그대로 db에 입력해주기
-            menuHelper.insertUserByMethod(menuImage, menutitle, menuprice, menudescription);
+            menuHelper.insertUserByMethod(restitle, menuImage, menutitle, menuprice, menudescription);
             Toast.makeText(getApplicationContext(), "메뉴가 등록되었습니다.", Toast.LENGTH_SHORT).show();
         }else{
             count = 0;
