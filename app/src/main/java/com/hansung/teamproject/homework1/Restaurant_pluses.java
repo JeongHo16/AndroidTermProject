@@ -35,7 +35,7 @@ public class Restaurant_pluses extends AppCompatActivity{
     String mPhotoFileName;
     final int REQUEST_IMAGE_CAPTURE = 100;
     Uri imageUri;
-    ResHelper  resHelper = new ResHelper(this);
+    ResHelper resHelper;
     int count = 0;
 
     @Override
@@ -47,6 +47,7 @@ public class Restaurant_pluses extends AppCompatActivity{
 
         final ImageView camera = (ImageButton) findViewById(R.id.cameraBtn);
         Button pluses = (Button) findViewById(R.id.pluses);
+        resHelper = new ResHelper(this);
 
         final EditText name = (EditText) findViewById(R.id.name);
         final EditText address = (EditText) findViewById(R.id.address);
@@ -66,6 +67,7 @@ public class Restaurant_pluses extends AppCompatActivity{
                 String plusesAddress = String.valueOf(address.getText());
                 String plusesPhone = String.valueOf(phone.getText());
                 String plusesImageUri = String.valueOf(imageUri);
+
                 Cursor cursor = resHelper.getAllUsersBySQL();
 
                 while(cursor.moveToNext()){     // cursor가 움직이면서 입력된 가게이름과 같은게 있는지 확인하고 있으면 count ++
@@ -75,9 +77,9 @@ public class Restaurant_pluses extends AppCompatActivity{
                         break;
                     }
                 }
-                if(count == 0){             //cursor가 만약 0이면 그대로 db에 입력해주기
-                    long insertmsg = resHelper.insertUserByMethod(plusesImageUri, plusesName, plusesAddress, plusesPhone);
-                    Toast.makeText(getApplicationContext(), insertmsg + "DBinsert", Toast.LENGTH_SHORT).show();
+                if(count == 0){             //count가 만약 0이면 그대로 db에 입력해주기
+                    resHelper.insertUserByMethod(plusesImageUri, plusesName, plusesAddress, plusesPhone);
+                    Toast.makeText(getApplicationContext(), "맛집이 등록되었습니다.", Toast.LENGTH_SHORT).show();
                 }else{
                     count = 0;
                 }

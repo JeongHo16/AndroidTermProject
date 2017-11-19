@@ -32,7 +32,7 @@ public class MenuDetailActivity extends AppCompatActivity {
         String name = intent.getStringExtra("name");
         String price = intent.getStringExtra("price");
         int image = intent.getIntExtra("image", 0);
-        String point = intent.getStringExtra("point");
+        String description = intent.getStringExtra("description");
 
         if(name != null) {
             TextView nameView = (TextView) findViewById(R.id.view_name);
@@ -46,9 +46,9 @@ public class MenuDetailActivity extends AppCompatActivity {
             ImageView imageView = (ImageView) findViewById(R.id.view_image);
             imageView.setImageResource(image);
         }
-        if(point != null){
+        if(description != null){
             TextView pointView = (TextView) findViewById(R.id.view_point);
-            pointView.setText("평점:"+point);
+            pointView.setText("설명:"+description);
         }
 
         ActionBar actionBar = getSupportActionBar();

@@ -15,10 +15,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import android.widget.Toast;
@@ -28,8 +30,13 @@ import java.util.ArrayList;
 
 public class RestaurantDetailActivity extends AppCompatActivity {
 
-    ResHelper  resHelper = new ResHelper(this);
+    ImageView imageView;
+    TextView textView_title;
+    TextView textView_address;
+    TextView textView_phone;
 
+    ResHelper resHelper;
+    MenuHelper menuHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,12 +44,13 @@ public class RestaurantDetailActivity extends AppCompatActivity {
 
         ArrayList<MyItem> data = new ArrayList<MyItem>();
 
+        resHelper = new ResHelper(this);
         Cursor cursor = resHelper.getAllUsersBySQL();
 
         Intent intent = getIntent();     // 인텐트 넘겨 받기
         String title;
 
-        if(intent.getStringExtra("plusesNames") != null){       // 추가매뉴에서 인텐트 받아옴
+        if(intent.getStringExtra("plusesNames") != null){       // 맛집등록에서 인텐트 받아옴
             title = intent.getStringExtra("plusesNames");
             Log.i("titles", title + "");
         }
@@ -52,10 +60,10 @@ public class RestaurantDetailActivity extends AppCompatActivity {
             Log.i("titles", intent.getStringExtra("plusesNames") + "");
         }
 
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-        TextView textView_title = (TextView) findViewById(R.id.title);
-        TextView textView_address = (TextView) findViewById(R.id.address);
-        TextView textView_phone = (TextView) findViewById(R.id.phonenumber);
+        imageView = (ImageView) findViewById(R.id.imageView);
+        textView_title = (TextView) findViewById(R.id.title);
+        textView_address = (TextView) findViewById(R.id.address);
+        textView_phone = (TextView) findViewById(R.id.phonenumber);
 
         while(cursor.moveToNext()){
             Log.i("getIntent_title", cursor.getString(2));
@@ -67,8 +75,12 @@ public class RestaurantDetailActivity extends AppCompatActivity {
                 break;
             }
         }
+        //viewAllToListView();
 
-        data.add(new MyItem(R.drawable.noodle_soup, "손칼국수", "5.000", "4.5"));
+
+
+
+        /*data.add(new MyItem(R.drawable.noodle_soup, "손칼국수", "5.000", "4.5"));
         data.add(new MyItem(R.drawable.bossam_formality, "보쌈 정식", "7.000", "4.0"));
         data.add(new MyItem(R.drawable.bossam_m, "보쌈 중", "25.000", "4.1"));
         data.add(new MyItem(R.drawable.bossam_l, "보쌈 대", "30.000", "3.7"));
@@ -85,20 +97,47 @@ public class RestaurantDetailActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 int imageView = ((MyItem)adapter.getItem(i)).image;
-                String name = ((MyItem)adapter.getItem(i)).name;
-                String price = ((MyItem)adapter.getItem(i)).price;
-                String point = ((MyItem)adapter.getItem(i)).point;
+                String menutitle = MenuRegistration.Menu.KEY_TITLE;
+                String menuprice = MenuRegistration.Menu.KEY_PRICE;
+                String menudescription = MenuRegistration.Menu.KEY_DESCRIPTION;
 
                 Intent intent = new Intent(getApplicationContext(), MenuDetailActivity.class);
 
-                intent.putExtra("name", name.toString());
-                intent.putExtra("price", price.toString());
+                intent.putExtra("name", menutitle);
+                intent.putExtra("price", menuprice);
                 intent.putExtra("image", imageView);
-                intent.putExtra("point", point);
+                intent.putExtra("point", menudescription);
                 startActivity(intent);
             }
-        });
+        });*/
     }
+
+    /*private void viewAllToListView() {
+
+        Cursor cursor = menuHelper.getAllUsersByMethod();
+
+        android.widget.SimpleCursorAdapter adapter =
+                new android.widget.SimpleCursorAdapter(getApplicationContext(),
+                        R.layout.custom_view_lay, cursor, new String[]{
+                        MenuRegistration.Menu.KEY_IMAGE,
+                        MenuRegistration.Menu.KEY_PRICE},
+                        new int[]{R.id.Item_name, R.id.Item_price}, 0);
+
+        ListView lv = (ListView)findViewById(R.id.list_item);
+        lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Adapter adapter = adapterView.getAdapter();
+
+                mId.setText(((Cursor)adapter.getItem(i)).getString(0));
+                mName.setText(((Cursor)adapter.getItem(i)).getString(1));
+                mPhone.setText(((Cursor)adapter.getItem(i)).getString(2));
+            }
+        });
+        lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+    }*/
 
         public void call(View v){
             TextView textView = (TextView)findViewById(R.id.phonenumber);

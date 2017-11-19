@@ -1,6 +1,7 @@
 package com.hansung.teamproject.homework1;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -24,10 +25,14 @@ public class MenuRegistrationActivity extends AppCompatActivity {
     private String mPhotoFileName;
     final int REQUEST_IMAGE_CAPTURE = 200;
     Uri imageUri;
+    int count = 0;
 
     EditText menuTitle;
     EditText menuPrice;
     EditText menuDescription;
+    ImageView menuImage;
+    Button menuAdd;
+    MenuHelper menuHelper;
 
     String title;
 
@@ -39,11 +44,13 @@ public class MenuRegistrationActivity extends AppCompatActivity {
         menuTitle = (EditText) findViewById(R.id.menutitle);
         menuPrice = (EditText) findViewById(R.id.menuprice);
         menuDescription = (EditText) findViewById(R.id.menudescription);
+        menuHelper = new MenuHelper(this);
 
         Intent intent = getIntent();
         title= intent.getStringExtra("plusesName");
         Log.i("getTitle : ", title +" ");
-        ImageView menuImage = (ImageButton) findViewById(R.id.menuimage);
+
+        menuImage = (ImageButton) findViewById(R.id.menuimage);
         menuImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,21 +58,45 @@ public class MenuRegistrationActivity extends AppCompatActivity {
             }
         });
 
-        Button menuAdd = (Button) findViewById(R.id.menuadd);
+        menuAdd = (Button) findViewById(R.id.menuadd);
         menuAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("onActivityResult_input", title + " ");
-                Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);        // 인텐트 넘겨주기
-                intent.putExtra("plusesNames", title);                           // 데이터 넣기 (가게이름)
-                setResult(RESULT_OK, intent);
-                menuSaveToDB(intent);
+                menuSaveToDB();
             }
         });
     }
 
-    private void menuSaveToDB(Intent intent) {
-        startActivity(intent);          // 인텐트 보내줌(어떤 가게인지)
+    private void menuSaveToDB() {
+        String menutitle = String.valueOf(menuTitle.getText());
+        String menuprice = String.valueOf(menuPrice.getText());
+        String menudescription = String.valueOf(menuDescription.getText());
+        String menuImage = String.valueOf(imageUri);
+
+        Cursor cursor = menuHelper.getAllUsersBySQL();
+
+        while(cursor.moveToNext()){     // cursor가 움직이면서 입력된 메뉴이름과 같은게 있는지 확인하고 있으면 count ++
+            Log.i("Cursor Log", cursor.getString(1));
+            if(cursor.getString(2).equals(menutitle)){
+                count ++;
+                break;
+            }
+        }
+        if(count == 0){             //count가 만약 0이면 그대로 db에 입력해주기
+            menuHelper.insertUserByMethod(menuImage, menutitle, menuprice, menudescription);
+            Toast.makeText(getApplicationContext(), "메뉴가 등록되었습니다.", Toast.LENGTH_SHORT).show();
+        }else{
+            count = 0;
+        }
+        Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);        // 인텐트 선언
+        intent.putExtra("menutitle", menutitle);
+        intent.putExtra("menuprice", menuprice);
+        intent.putExtra("menudescription", menudescription);
+        intent.putExtra("menuImage", menuImage);
+        Log.i("onActivityResult_input", title + " ");
+        intent.putExtra("plusesName", title);                           // 데이터 넣기 (가게이름)
+        setResult(RESULT_OK, intent);
+        startActivity(intent);  // 인텐트 보내줌(어떤 가게인지)
     }
 
     private String currentDateFormat() {
