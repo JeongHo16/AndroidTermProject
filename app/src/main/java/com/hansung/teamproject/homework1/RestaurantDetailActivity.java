@@ -29,7 +29,7 @@ import android.widget.Toast;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RestaurantDetailActivity extends AppCompatActivity implements RestaurantDetailFragment.OnTitleSelectedListener {
+public class RestaurantDetailActivity extends AppCompatActivity implements RestaurantDetailFragment.OnMenuSelectedListener {
 
     ImageView imageView;
     TextView textView_title;
@@ -39,7 +39,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
     private ResHelper resHelper;
     private MenuHelper menuHelper;
 
-    int mCurCheckPosition = -1;
+    //int mCurCheckPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,18 +83,18 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
         viewAllToListView();
     }
 
-    public void onTitleSelected(int i) {
+    public void onMenuSelected(int i) { //프래그먼트 강의자료 참고코드
         if (getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE) {
             MenuDetailFragment detailsFragment = new MenuDetailFragment();
-            detailsFragment.setSelection(i);
+            //detailsFragment.setSelection(i);
             getSupportFragmentManager().beginTransaction().replace(R.id.menudetails, detailsFragment).commit();
-        } else {
+        } /*else {
             Intent intent = new Intent(this, MenuDetailActivity.class);
             intent.putExtra("index", i);
             startActivity(intent);
 
-        }
+        }*/
     }
 
     private void viewAllToListView() { //9주차 실습과제 참고코드
@@ -128,8 +128,8 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
                 intent.putExtra("price", menuprice);
                 intent.putExtra("description", menudescription);
                 startActivity(intent);
-                mCurCheckPosition = i;
-                onTitleSelected(i);
+                //mCurCheckPosition = i;
+                onMenuSelected(i);
             }
         });
         lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);

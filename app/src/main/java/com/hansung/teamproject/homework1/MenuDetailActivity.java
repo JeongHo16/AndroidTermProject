@@ -24,6 +24,11 @@ import java.util.ArrayList;
 
 public class MenuDetailActivity extends AppCompatActivity {
 
+    static String name=null;
+    static String price=null;
+    static String menuimage=null;
+    static String description=null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,17 +40,16 @@ public class MenuDetailActivity extends AppCompatActivity {
             return;
         }
 
-        MenuDetailFragment details = new MenuDetailFragment();//프래그먼트 실습 참고 코드
-        details.setSelection(getIntent().getIntExtra("index", -1));
-        getSupportFragmentManager().beginTransaction().replace(R.id.menudetails, details).commit();
-
         Intent intent = getIntent(); //리스트뷰로 부터온 인텐트 받기
-        String name = intent.getStringExtra("name");
-        String price = intent.getStringExtra("price");
-        String menuimage = intent.getStringExtra("menuimage");
-        String description = intent.getStringExtra("description");
+        name = intent.getStringExtra("name");
+        price = intent.getStringExtra("price");
+        menuimage = intent.getStringExtra("menuimage");
+        description = intent.getStringExtra("description");
 
-        if(name != null) {
+        MenuDetailFragment details = new MenuDetailFragment();//프래그먼트 실습 참고 코드
+        //details.setSelection(getIntent().getIntExtra("index", -1));
+        getSupportFragmentManager().beginTransaction().replace(R.id.menudetails, details).commit();
+        /*if(name != null) {
             TextView nameView = (TextView) findViewById(R.id.view_name);
             nameView.setText(name);
         }
@@ -60,7 +64,7 @@ public class MenuDetailActivity extends AppCompatActivity {
         if(description != null){
             TextView pointView = (TextView) findViewById(R.id.view_point);
             pointView.setText("설명: "+description);
-        }
+        }*/
 
         ActionBar actionBar = getSupportActionBar(); //액션바 실습 참고 코드
         if (actionBar != null) {

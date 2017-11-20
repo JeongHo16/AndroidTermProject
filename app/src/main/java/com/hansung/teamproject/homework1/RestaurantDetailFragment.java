@@ -15,10 +15,10 @@ import android.widget.ListView;
  */
 public class RestaurantDetailFragment extends Fragment { //프래그먼트 강의자료 참고 코드
 
-//    int mCurCheckPosition = -1;
+    //int mCurCheckPosition = -1;
 
-    public interface OnTitleSelectedListener {
-        public void onTitleSelected(int i);
+    public interface OnMenuSelectedListener {
+        public void onMenuSelected(int i);
     }
 
 
@@ -41,11 +41,11 @@ public class RestaurantDetailFragment extends Fragment { //프래그먼트 강�
             mCurCheckPosition = savedInstanceState.getInt("curChoice", -1);
             if (mCurCheckPosition >= 0) {
                 Activity activity = getActivity(); // activity associated with the current fragment
-                ((OnTitleSelectedListener)activity).onTitleSelected(mCurCheckPosition);
+                ((OnMenuSelectedListener)activity).onMenuSelected(mCurCheckPosition);
 
-                ListView lv = (ListView) getView().findViewById(R.id.list_item);
+                *//*ListView lv = (ListView) getView().findViewById(R.id.list_item);
                 lv.setSelection(mCurCheckPosition);
-                lv.smoothScrollToPosition(mCurCheckPosition);
+                lv.smoothScrollToPosition(mCurCheckPosition);*//*
             }
         }
     }
