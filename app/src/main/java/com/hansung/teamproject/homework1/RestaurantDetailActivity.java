@@ -133,6 +133,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
                 }
                 intent.putExtra("title",title);
                 startActivity(intent);
+
                 onMenuSelected((MyItem)adapter.getItem(i));
             }
         });

@@ -15,7 +15,7 @@ import android.widget.ListView;
  */
 public class RestaurantDetailFragment extends Fragment { //프래그먼트 강의자료 참고 코드
 
-    //int mCurCheckPosition = -1;
+    int mCurCheckPosition = -1;
 
     public interface OnMenuSelectedListener {
         public void onMenuSelected(MyItem item);
@@ -34,18 +34,18 @@ public class RestaurantDetailFragment extends Fragment { //프래그먼트 강�
         return inflater.inflate(R.layout.fragment_restaurant_detail, container, false);
     }
 
-    /*@Override
+    @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         if (savedInstanceState != null) {
             mCurCheckPosition = savedInstanceState.getInt("curChoice", -1);
             if (mCurCheckPosition >= 0) {
                 Activity activity = getActivity(); // activity associated with the current fragment
-                ((OnMenuSelectedListener)activity).onMenuSelected(mCurCheckPosition);
+                //((OnMenuSelectedListener)activity).onMenuSelected(mCurCheckPosition);
 
-                *//*ListView lv = (ListView) getView().findViewById(R.id.list_item);
+                /*ListView lv = (ListView) getView().findViewById(R.id.list_item);
                 lv.setSelection(mCurCheckPosition);
-                lv.smoothScrollToPosition(mCurCheckPosition);*//*
+                lv.smoothScrollToPosition(mCurCheckPosition);*/
             }
         }
     }
@@ -54,5 +54,5 @@ public class RestaurantDetailFragment extends Fragment { //프래그먼트 강�
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("curChoice", mCurCheckPosition);
-    }*/
+    }
 }
