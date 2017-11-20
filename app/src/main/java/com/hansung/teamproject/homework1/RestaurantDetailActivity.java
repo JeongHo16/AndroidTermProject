@@ -44,6 +44,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_detail);
+        Log.i("생성상태", "RestaurantDetailActivity");
 
         menuHelper = new MenuHelper(this);
 
@@ -51,7 +52,6 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
         Cursor cursor = resHelper.getAllUsersBySQL();
 
         Intent intent = getIntent();     // 인텐트 넘겨 받기
-
 
         if(intent.getStringExtra("name") != null){       // 맛집등록에서 인텐트 받아옴
             title = intent.getStringExtra("name");
@@ -80,13 +80,24 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
         viewAllToListView();
     }
 
-    public void onMenuSelected(MyItem item) { //프래그먼트 강의자료 참고코드
+    public void onMenuSelected(MyItem item, int i) { //프래그먼트 강의자료 참고코드
+        MenuDetailFragment detailsFragment = new MenuDetailFragment();
         if (getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE) {
-            MenuDetailFragment detailsFragment = new MenuDetailFragment();
-            detailsFragment.setSelection(item);
-            getSupportFragmentManager().beginTransaction().replace(R.id.menudetails, detailsFragment).commit();
-        }else{
+            if(!detailsFragment.isAdded()){
+                detailsFragment.setSelection(item, i);
+                getSupportFragmentManager().beginTransaction().replace(R.id.menudetails, detailsFragment).commit();
+
+            }}else{
+            if(!detailsFragment.isAdded())
+                return;
+            Intent intent = new Intent(this, MenuDetailActivity.class);
+            intent.putExtra("menuimage", item.image);
+            intent.putExtra("name", item.name);
+            intent.putExtra("price", item.price);
+            intent.putExtra("description", item.point);
+            intent.putExtra("title",title);
+            startActivity(intent);
         }
     }
 
@@ -133,7 +144,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
                 }
                 intent.putExtra("title",title);
                 startActivity(intent);
-                onMenuSelected((MyItem)adapter.getItem(i));
+                onMenuSelected((MyItem) adapter.getItem(i), i);
             }
         });
         lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -198,9 +209,14 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
     @Override
     protected void onStart() {
         super.onStart();
-
         Intent intent = getIntent();
         String string = intent.getStringExtra("name");
-        Log.i("intent1", string +"");
+        Log.i("How_Frag", "Res_act_start");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("생성상태", "RestaurantDetailActivity" + " stop");
     }
 }

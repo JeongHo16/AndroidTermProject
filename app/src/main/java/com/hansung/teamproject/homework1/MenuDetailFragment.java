@@ -2,12 +2,16 @@ package com.hansung.teamproject.homework1;
 
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +37,15 @@ public class MenuDetailFragment extends Fragment { // 프래그먼트 참고 코
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.i("생성상태", "MenuDetailFragment");
+
+       if(getResources().getConfiguration().orientation //프래그먼트 실습 참고 코드
+                == Configuration.ORIENTATION_LANDSCAPE) {
+           if(!isAdded())
+               return null;
+       }
+       if(!isAdded())
+           return null;
         View rootView = (View)inflater.inflate(R.layout.fragment_menu_detail2, container, false);
 
         if(MenuDetailActivity.name != null) {
@@ -41,7 +54,7 @@ public class MenuDetailFragment extends Fragment { // 프래그먼트 참고 코
         }
         if(MenuDetailActivity.price != null){
             priceView = (TextView) rootView.findViewById(R.id.view_prise);
-            priceView.setText(MenuDetailActivity.price+"원");
+            priceView.setText(MenuDetailActivity.price+" 원");
         }
         if(MenuDetailActivity.menuimage != null){
             imageView = (ImageView) rootView.findViewById(R.id.view_image);
@@ -52,12 +65,19 @@ public class MenuDetailFragment extends Fragment { // 프래그먼트 참고 코
             pointView.setText("설명: "+MenuDetailActivity.description);
         }
 
+
         return rootView;
     }
-    public void setSelection(MyItem item){
+    public void setSelection(MyItem item, int i){
         MenuDetailActivity.name = item.name;
         MenuDetailActivity.description = item.point;
         MenuDetailActivity.price = item.price;
         MenuDetailActivity.menuimage = item.image;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i("생성상태", "MenuDetailFragment" + " stop");
     }
 }

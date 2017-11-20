@@ -12,7 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MenuDetailActivity extends AppCompatActivity {
 
@@ -34,22 +37,20 @@ public class MenuDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_detail);
+        Log.i("생성상태", "MenuDetailActivity");
+
 
         if(getResources().getConfiguration().orientation //프래그먼트 실습 참고 코드
                 == Configuration.ORIENTATION_LANDSCAPE) {
             finish();
             return;
         }
-
         Intent intent = getIntent(); //리스트뷰로 부터온 인텐트 받기
         name = intent.getStringExtra("name");
         price = intent.getStringExtra("price");
         menuimage = intent.getStringExtra("menuimage");
         description = intent.getStringExtra("description");
         title = intent.getStringExtra("title");
-
-        MenuDetailFragment details = new MenuDetailFragment();//프래그먼트 실습 참고 코드
-        getSupportFragmentManager().beginTransaction().replace(R.id.menudetails, details).commit();
 
         ActionBar actionBar = getSupportActionBar(); //액션바 실습 참고 코드
         if (actionBar != null) {
@@ -61,12 +62,17 @@ public class MenuDetailActivity extends AppCompatActivity {
                 Log.i("intent1", "intent1 push" + " = " + name);
             }
         }
+
+        MyItem myItem = new MyItem(menuimage, name, price, description);
+        MenuDetailFragment details = new MenuDetailFragment();//프래그먼트 실습 참고 코드
+        details.setSelection(myItem, getIntent().getIntExtra("index", -1));
+        getSupportFragmentManager().beginTransaction().replace(R.id.menudetails, details).commit();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i("intent1", "stop");
+        Log.i("생성상태", "MenuDetailActivity" + " stop");
     }
 
     @Override
@@ -76,6 +82,6 @@ public class MenuDetailActivity extends AppCompatActivity {
         intent1.putExtra("name", title);
         setResult(RESULT_OK, intent1);
         startActivity(intent1);
-        Log.i("intent1", "onPause" + " " + title);
+        Log.i("How_Frag", "onPause");
     }
 }
