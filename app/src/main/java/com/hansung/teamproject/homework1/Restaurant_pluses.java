@@ -100,7 +100,7 @@ public class Restaurant_pluses extends AppCompatActivity{
         return currentTimeStamp;
     }
 
-    private void dispatchTakePictureIntent() {      // 카메라 찍기
+    private void dispatchTakePictureIntent() {      // 카메라 찍기 //10주차 실습과제 참고코드
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -118,7 +118,7 @@ public class Restaurant_pluses extends AppCompatActivity{
         }
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) { //10주차 실습과제 참고코드
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             if (mPhotoFileName != null) {
                 mPhotoFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), mPhotoFileName);
