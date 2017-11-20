@@ -18,7 +18,7 @@ public class RestaurantDetailFragment extends Fragment { //프래그먼트 강�
     //int mCurCheckPosition = -1;
 
     public interface OnMenuSelectedListener {
-        public void onMenuSelected(int i);
+        public void onMenuSelected(MyItem item);
     }
 
 

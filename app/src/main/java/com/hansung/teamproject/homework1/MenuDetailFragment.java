@@ -54,4 +54,10 @@ public class MenuDetailFragment extends Fragment { // 프래그먼트 참고 코
 
         return rootView;
     }
+    public void setSelection(MyItem item){
+        MenuDetailActivity.name = item.name;
+        MenuDetailActivity.description = item.point;
+        MenuDetailActivity.price = item.price;
+        MenuDetailActivity.menuimage = item.image;
+    }
 }

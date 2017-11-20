@@ -80,11 +80,11 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
         viewAllToListView();
     }
 
-    public void onMenuSelected(int i) { //프래그먼트 강의자료 참고코드
+    public void onMenuSelected(MyItem item) { //프래그먼트 강의자료 참고코드
         if (getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE) {
             MenuDetailFragment detailsFragment = new MenuDetailFragment();
-            //detailsFragment.setSelection(i);
+            detailsFragment.setSelection(item);
             getSupportFragmentManager().beginTransaction().replace(R.id.menudetails, detailsFragment).commit();
         }else{
         }
@@ -133,7 +133,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
                 }
                 intent.putExtra("title",title);
                 startActivity(intent);
-                onMenuSelected(i);
+                onMenuSelected((MyItem)adapter.getItem(i));
             }
         });
         lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
