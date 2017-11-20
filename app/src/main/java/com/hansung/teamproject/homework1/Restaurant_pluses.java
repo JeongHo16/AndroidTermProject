@@ -94,7 +94,7 @@ public class Restaurant_pluses extends AppCompatActivity{
         });
     }
 
-    private String currentDateFormat(){
+    private String currentDateFormat(){  //10주차 실습과제 참고코드
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HH_mm_ss");
         String  currentTimeStamp = dateFormat.format(new Date());
         return currentTimeStamp;
