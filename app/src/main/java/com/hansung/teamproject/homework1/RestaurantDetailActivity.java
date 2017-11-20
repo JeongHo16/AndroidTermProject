@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -29,7 +30,7 @@ import android.widget.Toast;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RestaurantDetailActivity extends AppCompatActivity implements RestaurantDetailFragment.OnMenuSelectedListener {
+public class RestaurantDetailActivity extends AppCompatActivity implements RestaurantDetailFragment.OnMenuSelectedListener{
 
     ImageView imageView;
     TextView textView_title;
@@ -38,9 +39,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
 
     private ResHelper resHelper;
     private MenuHelper menuHelper;
-
-    //int mCurCheckPosition = -1;
-
+    String title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,16 +51,15 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
         Cursor cursor = resHelper.getAllUsersBySQL();
 
         Intent intent = getIntent();     // 인텐트 넘겨 받기
-        String title;
 
-        if(intent.getStringExtra("plusesNames") != null){       // 맛집등록에서 인텐트 받아옴
-            title = intent.getStringExtra("plusesNames");
-            Log.i("titles", title + "");
+
+        if(intent.getStringExtra("name") != null){       // 맛집등록에서 인텐트 받아옴
+            title = intent.getStringExtra("name");
+            Log.i("title1", title + "");
         }
         else{
             title = intent.getStringExtra("plusesName");
-            Log.i("title", title + "");
-            Log.i("titles", intent.getStringExtra("plusesNames") + "");
+            Log.i("title2", title + "");
         }
 
         imageView = (ImageView) findViewById(R.id.imageView);
@@ -70,7 +68,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
         textView_phone = (TextView) findViewById(R.id.phonenumber);
 
         while(cursor.moveToNext()){
-            Log.i("getIntent_title", cursor.getString(2));
+           // Log.i("getIntent_title", cursor.getString(2));
             if(cursor.getString(2).equals(title)){
                 imageView.setImageURI(Uri.parse(cursor.getString(1)));
                 textView_title.setText(cursor.getString(2));
@@ -79,7 +77,6 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
                 break;
             }
         }
-
         viewAllToListView();
     }
 
@@ -89,46 +86,53 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
             MenuDetailFragment detailsFragment = new MenuDetailFragment();
             //detailsFragment.setSelection(i);
             getSupportFragmentManager().beginTransaction().replace(R.id.menudetails, detailsFragment).commit();
-        } /*else {
-            Intent intent = new Intent(this, MenuDetailActivity.class);
-            intent.putExtra("index", i);
-            startActivity(intent);
-
-        }*/
+        }else{
+        }
     }
 
-    private void viewAllToListView() { //9주차 실습과제 참고코드
+    public void viewAllToListView() { //9주차 실습과제 참고코드
         Cursor cursor = menuHelper.getAllUsersByMethod();
 
-        android.widget.SimpleCursorAdapter adapter =
-                new android.widget.SimpleCursorAdapter(getApplicationContext(),
-                        R.layout.custom_view_lay, cursor, new String[]{
-                        MenuRegistration.Menu.KEY_IMAGE,
-                        MenuRegistration.Menu.KEY_TITLE,
-                        MenuRegistration.Menu.KEY_PRICE},
-                        new int[]{R.id.Item_image, R.id.Item_name, R.id.Item_price}, 0);
+        ArrayList<MyItem> data = new ArrayList<MyItem>();
+        while(cursor.moveToNext()){
+            Log.i("ListView_item", cursor.getString(1) + " vs " + textView_title.getText() );
+            if(cursor.getString(1).equals(textView_title.getText())){
+                data.add(new MyItem(cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5)));
+            }
+        }
+
+        CustomAdapter customAdapter = new CustomAdapter(this, R.layout.custom_view_lay, data);
 
         ListView lv = (ListView)findViewById(R.id.list_item);
-        lv.setAdapter(adapter);
+        lv.setAdapter(customAdapter);
 
        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Adapter adapter = adapterView.getAdapter();
 
-                String menuimage = ((Cursor)adapter.getItem(i)).getString(2);
-                String menutitle = ((Cursor)adapter.getItem(i)).getString(3);
-                String menuprice = ((Cursor)adapter.getItem(i)).getString(4);
-                String menudescription = ((Cursor)adapter.getItem(i)).getString(5);
-
                 Intent intent = new Intent(getApplicationContext(), MenuDetailActivity.class);
-
-                intent.putExtra("menuimage", menuimage);
-                intent.putExtra("name", menutitle);
-                intent.putExtra("price", menuprice);
-                intent.putExtra("description", menudescription);
+                if (((MyItem)adapter.getItem(i)).image != null) {
+                    String menuimage =((MyItem)adapter.getItem(i)).image;
+                    intent.putExtra("menuimage", menuimage);
+                }
+                if (((MyItem) adapter.getItem(i)).name != null) {
+                    String menutitle = ((MyItem) adapter.getItem(i)).name;
+                    intent.putExtra("name", menutitle);
+                }
+                if (((MyItem) adapter.getItem(i)).price != null) {
+                    String menuprice = ((MyItem) adapter.getItem(i)).price;
+                    intent.putExtra("price", menuprice);
+                }
+                if (((MyItem) adapter.getItem(i)).point != null) {
+                    String menudescription = ((MyItem) adapter.getItem(i)).point;
+                    intent.putExtra("description", menudescription);
+                }
+                intent.putExtra("title",title);
                 startActivity(intent);
-                //mCurCheckPosition = i;
                 onMenuSelected(i);
             }
         });
@@ -189,5 +193,14 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
                 break;
             }
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Intent intent = getIntent();
+        String string = intent.getStringExtra("name");
+        Log.i("intent1", string +"");
     }
 }

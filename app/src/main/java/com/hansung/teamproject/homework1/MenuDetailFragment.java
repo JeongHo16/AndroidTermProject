@@ -1,6 +1,7 @@
 package com.hansung.teamproject.homework1;
 
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +17,10 @@ import android.widget.TextView;
  */
 public class MenuDetailFragment extends Fragment { // 프래그먼트 참고 코드
 
-    //int index;
+    TextView nameView;
+    TextView priceView;
+    TextView pointView;
+    ImageView imageView;
 
     public MenuDetailFragment() {
         // Required empty public constructor
@@ -31,34 +35,23 @@ public class MenuDetailFragment extends Fragment { // 프래그먼트 참고 코
         // Inflate the layout for this fragment
         View rootView = (View)inflater.inflate(R.layout.fragment_menu_detail2, container, false);
 
-
-            /*TextView nameView = (TextView) rootView.findViewById(R.id.view_name);
-            nameView.setText(MenuDetailActivity.name);
-            TextView priceView = (TextView) rootView.findViewById(R.id.view_prise);
-            priceView.setText(MenuDetailActivity.price+"원");
-            ImageView imageView = (ImageView) rootView.findViewById(R.id.view_image);
-            imageView.setImageURI(Uri.parse(MenuDetailActivity.menuimage));
-            TextView pointView = (TextView) rootView.findViewById(R.id.view_point);
-            pointView.setText("설명: "+MenuDetailActivity.description);*/
-
         if(MenuDetailActivity.name != null) {
-            TextView nameView = (TextView) rootView.findViewById(R.id.view_name);
+            nameView = (TextView) rootView.findViewById(R.id.view_name);
             nameView.setText(MenuDetailActivity.name);
         }
         if(MenuDetailActivity.price != null){
-            TextView priceView = (TextView) rootView.findViewById(R.id.view_prise);
+            priceView = (TextView) rootView.findViewById(R.id.view_prise);
             priceView.setText(MenuDetailActivity.price+"원");
         }
         if(MenuDetailActivity.menuimage != null){
-            ImageView imageView = (ImageView) rootView.findViewById(R.id.view_image);
+            imageView = (ImageView) rootView.findViewById(R.id.view_image);
             imageView.setImageURI(Uri.parse(MenuDetailActivity.menuimage));
         }
         if(MenuDetailActivity.description != null){
-            TextView pointView = (TextView) rootView.findViewById(R.id.view_point);
+            pointView = (TextView) rootView.findViewById(R.id.view_point);
             pointView.setText("설명: "+MenuDetailActivity.description);
         }
 
         return rootView;
     }
-
 }

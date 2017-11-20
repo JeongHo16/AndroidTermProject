@@ -28,6 +28,7 @@ public class MenuDetailActivity extends AppCompatActivity {
     static String price=null;
     static String menuimage=null;
     static String description=null;
+    String title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,26 +46,10 @@ public class MenuDetailActivity extends AppCompatActivity {
         price = intent.getStringExtra("price");
         menuimage = intent.getStringExtra("menuimage");
         description = intent.getStringExtra("description");
+        title = intent.getStringExtra("title");
 
         MenuDetailFragment details = new MenuDetailFragment();//프래그먼트 실습 참고 코드
-        //details.setSelection(getIntent().getIntExtra("index", -1));
         getSupportFragmentManager().beginTransaction().replace(R.id.menudetails, details).commit();
-        /*if(name != null) {
-            TextView nameView = (TextView) findViewById(R.id.view_name);
-            nameView.setText(name);
-        }
-        if(price != null){
-            TextView priceView = (TextView) findViewById(R.id.view_prise);
-            priceView.setText(price+"원");
-        }
-        if(menuimage != null){
-            ImageView imageView = (ImageView) findViewById(R.id.view_image);
-            imageView.setImageURI(Uri.parse(menuimage));
-        }
-        if(description != null){
-            TextView pointView = (TextView) findViewById(R.id.view_point);
-            pointView.setText("설명: "+description);
-        }*/
 
         ActionBar actionBar = getSupportActionBar(); //액션바 실습 참고 코드
         if (actionBar != null) {
@@ -73,7 +58,24 @@ public class MenuDetailActivity extends AppCompatActivity {
             if (drawable != null) {
                 drawable.setTint(Color.WHITE);
                 actionBar.setHomeAsUpIndicator(drawable);
+                Log.i("intent1", "intent1 push" + " = " + name);
             }
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("intent1", "stop");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Intent intent1 = new Intent(getApplicationContext(), RestaurantDetailActivity.class);
+        intent1.putExtra("name", title);
+        setResult(RESULT_OK, intent1);
+        startActivity(intent1);
+        Log.i("intent1", "onPause" + " " + title);
     }
 }
