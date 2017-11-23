@@ -22,9 +22,6 @@ import java.util.List;
  */
 public class RestaurantDetailFragment extends Fragment { //프래그먼트 강의자료 참고 코드
 
-    int mCurCheckPosition;
-    MyItem myItem;
-
     public interface OnMenuSelectedListener {
         public void onMenuSelected(MyItem myItem);
     }
@@ -40,53 +37,6 @@ public class RestaurantDetailFragment extends Fragment { //프래그먼트 강�
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_restaurant_detail, container, false);
-        /*Log.i("생성상태", "RestaurantDetailFragment");
-
-        View rootView = (View)inflater.inflate(R.layout.fragment_restaurant_detail, container, false);
-
-        ListView listView = (ListView)rootView.findViewById(R.id.list_item);
-        listView.setAdapter(new ArrayAdapter<MyItem>(getActivity(), android.R.layout.simple_list_item_activated_1));
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mCurCheckPosition = position;
-                Activity activity = getActivity();
-                if(activity == null)
-                    activity = new Activity();
-                myItem = (MyItem)parent.getItemAtPosition(position);
-                ((OnMenuSelectedListener)activity).onMenuSelected(myItem);
-            }
-        });
-        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        return rootView;*/
     }
 
-    /*@Override
-    public void onViewStateRestored(Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        if (savedInstanceState != null) {
-            mCurCheckPosition = savedInstanceState.getInt("curChoice", -1);
-            if (mCurCheckPosition >= 0) {
-                Activity activity = getActivity(); // activity associated with the current fragment
-                ((OnMenuSelectedListener)activity).onMenuSelected(myItem, mCurCheckPosition);
-
-                ListView lv = (ListView) getView().findViewById(R.id.list_item);
-                lv.setSelection(mCurCheckPosition);
-                lv.smoothScrollToPosition(mCurCheckPosition);
-            }
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("curChoice", mCurCheckPosition);
-    }*/
-
-    /*@Override
-    public void onStop() {
-        super.onStop();
-        Log.i("생성상태", "RestaurantDetailFragment" + " stop");
-    }*/
 }

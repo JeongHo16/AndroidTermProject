@@ -30,22 +30,11 @@ public class MenuDetailFragment extends Fragment { // 프래그먼트 참고 코
         // Required empty public constructor
     }
 
-    //public void setSelection(int i) { index = i; }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //Log.i("생성상태", "MenuDetailFragment");
 
-       /*if(getResources().getConfiguration().orientation //프래그먼트 실습 참고 코드
-                == Configuration.ORIENTATION_LANDSCAPE) {
-           if(!isAdded())
-               return null;
-       }
-       if(!isAdded())
-           return null;*/
         View rootView = (View)inflater.inflate(R.layout.fragment_menu_detail2, container, false);
 
         if(MenuDetailActivity.name != null) {
@@ -73,10 +62,4 @@ public class MenuDetailFragment extends Fragment { // 프래그먼트 참고 코
         MenuDetailActivity.price = item.price;
         MenuDetailActivity.menuimage = item.image;
     }
-
-    /*@Override
-    public void onStop() {
-        super.onStop();
-        Log.i("생성상태", "MenuDetailFragment" + " stop");
-    }*/
 }

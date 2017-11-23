@@ -37,7 +37,6 @@ public class MenuDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_detail);
-        //Log.i("생성상태", "MenuDetailActivity");
 
 
         if(getResources().getConfiguration().orientation //프래그먼트 실습 참고 코드
@@ -59,7 +58,6 @@ public class MenuDetailActivity extends AppCompatActivity {
             if (drawable != null) {
                 drawable.setTint(Color.WHITE);
                 actionBar.setHomeAsUpIndicator(drawable);
-                //Log.i("intent1", "intent1 push" + " = " + name);
             }
         }
 
@@ -69,12 +67,6 @@ public class MenuDetailActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.menudetails, details).commit();
     }
 
-    /*@Override
-    protected void onStop() {
-        super.onStop();
-        Log.i("생성상태", "MenuDetailActivity" + " stop");
-    }*/
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -82,6 +74,5 @@ public class MenuDetailActivity extends AppCompatActivity {
         intent1.putExtra("plusesName", title);
         setResult(RESULT_OK, intent1);
         startActivity(intent1);
-        //Log.i("How_Frag", "onPause");
     }
 }

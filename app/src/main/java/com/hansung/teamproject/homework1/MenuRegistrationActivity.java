@@ -34,7 +34,6 @@ public class MenuRegistrationActivity extends AppCompatActivity {
     ImageButton menuImage;
     Button menuAdd;
     MenuHelper menuHelper;
-
     String title;
 
     @Override
@@ -49,7 +48,6 @@ public class MenuRegistrationActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         title= intent.getStringExtra("plusesName");
-        //Log.i("getTitle : ", title +" ");
 
         menuImage = (ImageButton) findViewById(R.id.menuimage);
         menuImage.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +76,6 @@ public class MenuRegistrationActivity extends AppCompatActivity {
         Cursor cursor = menuHelper.getAllUsersBySQL();
 
         while(cursor.moveToNext()){     // cursor가 움직이면서 입력된 메뉴이름과 같은게 있는지 확인하고 있으면 count ++
-            //Log.i("Cursor Log", cursor.getString(1));
             if(cursor.getString(1).equals(title)){
                 if(cursor.getString(3).equals(menutitle)){
                     count++;
@@ -96,11 +93,6 @@ public class MenuRegistrationActivity extends AppCompatActivity {
             return;
         }
         Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);        // 인텐트 선언
-        /*intent.putExtra("menutitle", menutitle);
-        intent.putExtra("menuprice", menuprice);
-        intent.putExtra("menudescription", menudescription);
-        intent.putExtra("menuImage", menuImage);*/
-        //Log.i("onActivityResult_input", title + " ");
         intent.putExtra("plusesName", title);                           // 데이터 넣기 (가게이름)
         setResult(RESULT_OK, intent);
         startActivity(intent);  // 인텐트 보내줌(어떤 가게인지)

@@ -31,11 +31,13 @@ import java.util.Date;
 public class Restaurant_pluses extends AppCompatActivity{
 
     final int REQUEST_EXTERNAL_STORAGE_FOR_MULTIMEDIA = 1;
+    final int REQUEST_IMAGE_CAPTURE = 100;
+
     File mPhotoFile;
     String mPhotoFileName;
-    final int REQUEST_IMAGE_CAPTURE = 100;
-    Uri imageUri;
+
     ResHelper resHelper;
+    Uri imageUri;
     int count = 0;
 
     @Override
@@ -46,14 +48,6 @@ public class Restaurant_pluses extends AppCompatActivity{
         checkDangerousPermissions();        // 파일 권한 확인 - 읽기, 쓰기
 
         final ImageButton camera = (ImageButton) findViewById(R.id.cameraBtn);
-        Button pluses = (Button) findViewById(R.id.pluses);
-
-        resHelper = new ResHelper(this);
-
-        final EditText name = (EditText) findViewById(R.id.name);
-        final EditText address = (EditText) findViewById(R.id.address);
-        final EditText phone = (EditText) findViewById(R.id.phone);
-
         camera.setOnClickListener(new View.OnClickListener() {             // 카메라 눌렀을 경우 동작
             @Override
             public void onClick(View v) {
@@ -61,6 +55,12 @@ public class Restaurant_pluses extends AppCompatActivity{
             }
         });
 
+        final EditText name = (EditText) findViewById(R.id.name);
+        final EditText address = (EditText) findViewById(R.id.address);
+        final EditText phone = (EditText) findViewById(R.id.phone);
+
+        resHelper = new ResHelper(this);
+        Button pluses = (Button) findViewById(R.id.pluses);
         pluses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,12 +85,8 @@ public class Restaurant_pluses extends AppCompatActivity{
                     count = 0;
                     return;
                 }
-
                 Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);        // 인텐트 선언
                 intent.putExtra("plusesName", plusesName);
-                /*intent.putExtra("plusesAddress", plusesAddress);
-                intent.putExtra("plusesPhone", plusesPhone);
-                intent.putExtra("imageURI", plusesImageUri);*/
                 startActivity(intent);                  //인텐트 넘기기
             }
         });
@@ -98,7 +94,6 @@ public class Restaurant_pluses extends AppCompatActivity{
 
     private void dispatchTakePictureIntent() {      // 카메라 찍기 //10주차 실습과제 참고코드
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             //1. 카메라 앱으로 찍은 이미지를 저장할 파일 객체 생성
             mPhotoFileName = "IMG"+currentDateFormat()+".jpg";
