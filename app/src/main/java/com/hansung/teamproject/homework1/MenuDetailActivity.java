@@ -79,7 +79,7 @@ public class MenuDetailActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Intent intent1 = new Intent(getApplicationContext(), RestaurantDetailActivity.class);
-        intent1.putExtra("name", title);
+        intent1.putExtra("plusesName", title);
         setResult(RESULT_OK, intent1);
         startActivity(intent1);
         //Log.i("How_Frag", "onPause");

@@ -52,14 +52,15 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
 
         Intent intent = getIntent();     // 인텐트 넘겨 받기
 
-        if(intent.getStringExtra("name") != null){       // 맛집등록에서 인텐트 받아옴
+        /*if(intent.getStringExtra("name") != null){      // 메뉴상세에서 인텐트 받아옴
             title = intent.getStringExtra("name");
             //Log.i("title1", title + "");
         }
         else{
-            title = intent.getStringExtra("plusesName");
+            title = intent.getStringExtra("plusesName");// 맛집등록에서 인텐트 받아옴
             //Log.i("title2", title + "");
-        }
+        }*/
+        title = intent.getStringExtra("plusesName");
 
         imageView = (ImageView) findViewById(R.id.imageView);
         textView_title = (TextView) findViewById(R.id.title);
