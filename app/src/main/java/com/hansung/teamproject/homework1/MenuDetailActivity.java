@@ -37,7 +37,7 @@ public class MenuDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_detail);
-        Log.i("생성상태", "MenuDetailActivity");
+        //Log.i("생성상태", "MenuDetailActivity");
 
 
         if(getResources().getConfiguration().orientation //프래그먼트 실습 참고 코드
@@ -59,21 +59,21 @@ public class MenuDetailActivity extends AppCompatActivity {
             if (drawable != null) {
                 drawable.setTint(Color.WHITE);
                 actionBar.setHomeAsUpIndicator(drawable);
-                Log.i("intent1", "intent1 push" + " = " + name);
+                //Log.i("intent1", "intent1 push" + " = " + name);
             }
         }
 
         MyItem myItem = new MyItem(menuimage, name, price, description);
         MenuDetailFragment details = new MenuDetailFragment();//프래그먼트 실습 참고 코드
-        details.setSelection(myItem, getIntent().getIntExtra("index", -1));
+        details.setSelection(myItem);
         getSupportFragmentManager().beginTransaction().replace(R.id.menudetails, details).commit();
     }
 
-    @Override
+    /*@Override
     protected void onStop() {
         super.onStop();
         Log.i("생성상태", "MenuDetailActivity" + " stop");
-    }
+    }*/
 
     @Override
     protected void onPause() {
@@ -82,6 +82,6 @@ public class MenuDetailActivity extends AppCompatActivity {
         intent1.putExtra("name", title);
         setResult(RESULT_OK, intent1);
         startActivity(intent1);
-        Log.i("How_Frag", "onPause");
+        //Log.i("How_Frag", "onPause");
     }
 }

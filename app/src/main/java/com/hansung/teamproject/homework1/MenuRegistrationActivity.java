@@ -2,6 +2,7 @@ package com.hansung.teamproject.homework1;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -30,7 +31,7 @@ public class MenuRegistrationActivity extends AppCompatActivity {
     EditText menuTitle;
     EditText menuPrice;
     EditText menuDescription;
-    ImageView menuImage;
+    ImageButton menuImage;
     Button menuAdd;
     MenuHelper menuHelper;
 
@@ -48,7 +49,7 @@ public class MenuRegistrationActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         title= intent.getStringExtra("plusesName");
-        Log.i("getTitle : ", title +" ");
+        //Log.i("getTitle : ", title +" ");
 
         menuImage = (ImageButton) findViewById(R.id.menuimage);
         menuImage.setOnClickListener(new View.OnClickListener() {
@@ -77,25 +78,29 @@ public class MenuRegistrationActivity extends AppCompatActivity {
         Cursor cursor = menuHelper.getAllUsersBySQL();
 
         while(cursor.moveToNext()){     // cursor가 움직이면서 입력된 메뉴이름과 같은게 있는지 확인하고 있으면 count ++
-            Log.i("Cursor Log", cursor.getString(1));
-            if(cursor.getString(3).equals(menutitle)){
-                count++;
-                Toast.makeText(getApplicationContext(), "이미 등록된 메뉴입니다.", Toast.LENGTH_SHORT).show();
-                break;
+            //Log.i("Cursor Log", cursor.getString(1));
+            if(cursor.getString(1).equals(title)){
+                if(cursor.getString(3).equals(menutitle)){
+                    count++;
+                    Toast.makeText(getApplicationContext(), "이미 등록된 메뉴입니다.", Toast.LENGTH_SHORT).show();
+                    break;
+                }
             }
+
         }
         if(count == 0){             //count가 만약 0이면 그대로 db에 입력해주기
             menuHelper.insertUserBySQL(restitle, menuImage, menutitle, menuprice, menudescription);
             Toast.makeText(getApplicationContext(), "메뉴가 등록되었습니다.", Toast.LENGTH_SHORT).show();
         }else{
             count = 0;
+            return;
         }
         Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);        // 인텐트 선언
-        intent.putExtra("menutitle", menutitle);
+        /*intent.putExtra("menutitle", menutitle);
         intent.putExtra("menuprice", menuprice);
         intent.putExtra("menudescription", menudescription);
-        intent.putExtra("menuImage", menuImage);
-        Log.i("onActivityResult_input", title + " ");
+        intent.putExtra("menuImage", menuImage);*/
+        //Log.i("onActivityResult_input", title + " ");
         intent.putExtra("plusesName", title);                           // 데이터 넣기 (가게이름)
         setResult(RESULT_OK, intent);
         startActivity(intent);  // 인텐트 보내줌(어떤 가게인지)
@@ -130,7 +135,7 @@ public class MenuRegistrationActivity extends AppCompatActivity {
             if (mPhotoFileName != null) {
                 mPhotoFile = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), mPhotoFileName);
 
-                ImageView menuImage = (ImageButton) findViewById(R.id.menuimage);
+                ImageButton menuImage = (ImageButton) findViewById(R.id.menuimage);
                 menuImage.setImageURI(Uri.fromFile(mPhotoFile));
 
                 // 파일 추가

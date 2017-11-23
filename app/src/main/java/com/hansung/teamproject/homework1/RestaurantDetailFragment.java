@@ -39,10 +39,13 @@ public class RestaurantDetailFragment extends Fragment { //프래그먼트 강�
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Log.i("생성상태", "RestaurantDetailFragment");
+        //Log.i("생성상태", "RestaurantDetailFragment");
+
         View rootView = (View)inflater.inflate(R.layout.fragment_restaurant_detail, container, false);
+
         ListView listView = (ListView)rootView.findViewById(R.id.list_item);
         listView.setAdapter(new ArrayAdapter<MyItem>(getActivity(), android.R.layout.simple_list_item_activated_1));
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -80,9 +83,9 @@ public class RestaurantDetailFragment extends Fragment { //프래그먼트 강�
         outState.putInt("curChoice", mCurCheckPosition);
     }
 
-    @Override
+    /*@Override
     public void onStop() {
         super.onStop();
         Log.i("생성상태", "RestaurantDetailFragment" + " stop");
-    }
+    }*/
 }

@@ -44,10 +44,9 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_detail);
-        Log.i("생성상태", "RestaurantDetailActivity");
+        //Log.i("생성상태", "RestaurantDetailActivity");
 
         menuHelper = new MenuHelper(this);
-
         resHelper = new ResHelper(this);
         Cursor cursor = resHelper.getAllUsersBySQL();
 
@@ -55,11 +54,11 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
 
         if(intent.getStringExtra("name") != null){       // 맛집등록에서 인텐트 받아옴
             title = intent.getStringExtra("name");
-            Log.i("title1", title + "");
+            //Log.i("title1", title + "");
         }
         else{
             title = intent.getStringExtra("plusesName");
-            Log.i("title2", title + "");
+            //Log.i("title2", title + "");
         }
 
         imageView = (ImageView) findViewById(R.id.imageView);
@@ -85,10 +84,11 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
         if (getResources().getConfiguration().orientation
                 == Configuration.ORIENTATION_LANDSCAPE) {
             if(!detailsFragment.isAdded()){
-                detailsFragment.setSelection(item, i);
+                detailsFragment.setSelection(item);
                 getSupportFragmentManager().beginTransaction().replace(R.id.menudetails, detailsFragment).commit();
 
-            }}else{
+            }
+        }else{
             if(!detailsFragment.isAdded())
                 return;
             Intent intent = new Intent(this, MenuDetailActivity.class);
@@ -106,7 +106,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
 
         ArrayList<MyItem> data = new ArrayList<MyItem>();
         while(cursor.moveToNext()){
-            Log.i("ListView_item", cursor.getString(1) + " vs " + textView_title.getText() );
+            //Log.i("ListView_item", cursor.getString(1) + " vs " + textView_title.getText() );
             if(cursor.getString(1).equals(textView_title.getText())){
                 data.add(new MyItem(cursor.getString(2),
                         cursor.getString(3),
@@ -168,10 +168,10 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
     public boolean onOptionsItemSelected(MenuItem item) {//액션바 강의자료 참고코드
         switch (item.getItemId()) {
             case R.id.add:
-                TextView textView_title = (TextView) findViewById(R.id.title);
+                //TextView textView_title = (TextView) findViewById(R.id.title);
                 Intent intent = new Intent(getApplicationContext(), MenuRegistrationActivity.class);        // 인텐트 선언
-                intent.putExtra("plusesName", textView_title.getText());
-                Log.i("add_btn", textView_title.getText() + "");
+                intent.putExtra("plusesName", title);
+                //Log.i("add_btn", textView_title.getText() + "");
                 startActivity(intent);
                 return true;
 
@@ -185,7 +185,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
         super.onActivityResult(requestCode, resultCode, data);
         if(data == null)
             return;
-        Log.i("onActivityResult_output", "start");
+        //Log.i("onActivityResult_output", "start");
         Cursor cursor = resHelper.getAllUsersBySQL();
         String intentData = data.getStringExtra("plusesName");
 
@@ -195,7 +195,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
         TextView textView_phone = (TextView) findViewById(R.id.phonenumber);
 
         while(cursor.moveToNext()){
-            Log.i("onActivityResult", intentData);
+            //Log.i("onActivityResult", intentData);
             if(cursor.getString(2).equals(intentData)){
                 imageView.setImageURI(Uri.parse(cursor.getString(1)));
                 textView_title.setText(cursor.getString(2));

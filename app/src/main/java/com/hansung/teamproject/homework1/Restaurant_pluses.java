@@ -45,8 +45,9 @@ public class Restaurant_pluses extends AppCompatActivity{
 
         checkDangerousPermissions();        // 파일 권한 확인 - 읽기, 쓰기
 
-        final ImageView camera = (ImageButton) findViewById(R.id.cameraBtn);
+        final ImageButton camera = (ImageButton) findViewById(R.id.cameraBtn);
         Button pluses = (Button) findViewById(R.id.pluses);
+
         resHelper = new ResHelper(this);
 
         final EditText name = (EditText) findViewById(R.id.name);
@@ -71,9 +72,9 @@ public class Restaurant_pluses extends AppCompatActivity{
                 Cursor cursor = resHelper.getAllUsersBySQL();
 
                 while(cursor.moveToNext()){     // cursor가 움직이면서 입력된 가게이름과 같은게 있는지 확인하고 있으면 count ++
-                    Log.i("Cursor Log", cursor.getString(1));
                     if(cursor.getString(2).equals(plusesName)){
                         count ++;
+                        Toast.makeText(getApplicationContext(), "이미 등록된 맛집입니다.", Toast.LENGTH_SHORT).show();
                         break;
                     }
                 }
@@ -82,22 +83,17 @@ public class Restaurant_pluses extends AppCompatActivity{
                     Toast.makeText(getApplicationContext(), "맛집이 등록되었습니다.", Toast.LENGTH_SHORT).show();
                 }else{
                     count = 0;
+                    return;
                 }
 
                 Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);        // 인텐트 선언
                 intent.putExtra("plusesName", plusesName);
-                intent.putExtra("plusesAddress", plusesAddress);
+                /*intent.putExtra("plusesAddress", plusesAddress);
                 intent.putExtra("plusesPhone", plusesPhone);
-                intent.putExtra("imageURI", plusesImageUri);
+                intent.putExtra("imageURI", plusesImageUri);*/
                 startActivity(intent);                  //인텐트 넘기기
             }
         });
-    }
-
-    private String currentDateFormat(){  //10주차 실습과제 참고코드
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HH_mm_ss");
-        String  currentTimeStamp = dateFormat.format(new Date());
-        return currentTimeStamp;
     }
 
     private void dispatchTakePictureIntent() {      // 카메라 찍기 //10주차 실습과제 참고코드
@@ -116,6 +112,12 @@ public class Restaurant_pluses extends AppCompatActivity{
             } else
                 Toast.makeText(getApplicationContext(), "file null", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private String currentDateFormat(){  //10주차 실습과제 참고코드
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HH_mm_ss");
+        String  currentTimeStamp = dateFormat.format(new Date());
+        return currentTimeStamp;
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) { //10주차 실습과제 참고코드
