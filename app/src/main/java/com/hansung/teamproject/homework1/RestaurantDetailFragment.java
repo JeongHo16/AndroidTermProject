@@ -26,7 +26,7 @@ public class RestaurantDetailFragment extends Fragment { //프래그먼트 강�
     MyItem myItem;
 
     public interface OnMenuSelectedListener {
-        public void onMenuSelected(MyItem myItem, int i);
+        public void onMenuSelected(MyItem myItem);
     }
 
 
@@ -39,7 +39,8 @@ public class RestaurantDetailFragment extends Fragment { //프래그먼트 강�
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //Log.i("생성상태", "RestaurantDetailFragment");
+        return inflater.inflate(R.layout.fragment_restaurant_detail, container, false);
+        /*Log.i("생성상태", "RestaurantDetailFragment");
 
         View rootView = (View)inflater.inflate(R.layout.fragment_restaurant_detail, container, false);
 
@@ -54,14 +55,14 @@ public class RestaurantDetailFragment extends Fragment { //프래그먼트 강�
                 if(activity == null)
                     activity = new Activity();
                 myItem = (MyItem)parent.getItemAtPosition(position);
-                ((OnMenuSelectedListener)activity).onMenuSelected(myItem, position);
+                ((OnMenuSelectedListener)activity).onMenuSelected(myItem);
             }
         });
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        return rootView;
+        return rootView;*/
     }
 
-    @Override
+    /*@Override
     public void onViewStateRestored(Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
         if (savedInstanceState != null) {
@@ -81,7 +82,7 @@ public class RestaurantDetailFragment extends Fragment { //프래그먼트 강�
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("curChoice", mCurCheckPosition);
-    }
+    }*/
 
     /*@Override
     public void onStop() {
