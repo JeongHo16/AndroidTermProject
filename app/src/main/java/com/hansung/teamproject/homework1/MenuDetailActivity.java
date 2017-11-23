@@ -38,7 +38,6 @@ public class MenuDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_detail);
 
-
         if(getResources().getConfiguration().orientation //프래그먼트 실습 참고 코드
                 == Configuration.ORIENTATION_LANDSCAPE) {
             finish();

@@ -87,7 +87,6 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
 
         ArrayList<MyItem> data = new ArrayList<MyItem>();
         while(cursor.moveToNext()){
-            //Log.i("ListView_item", cursor.getString(1) + " vs " + textView_title.getText() );
             if(cursor.getString(1).equals(textView_title.getText())){
                 data.add(new MyItem(cursor.getString(2),
                         cursor.getString(3),
