@@ -12,7 +12,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallback{
 
     private FusedLocationProviderClient fusedLocationProviderClient;
-
+    GoogleMap mGoogleMap = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +26,6 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
+        mGoogleMap = googleMap;
     }
 }
