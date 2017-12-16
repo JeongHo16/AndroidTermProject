@@ -67,7 +67,7 @@ public class AnimatedSurfaceView extends SurfaceView implements SurfaceHolder.Ca
             synchronized (holder){
                 for(int idx = 0; idx< aryBall.size(); idx++){
                     Ball b = aryBall.get(idx);
-                    b.bigger(random.nextInt(5));
+                    b.bigger(2);
                     b.draw(canvas);
                 }
             }

@@ -30,7 +30,7 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
     private FusedLocationProviderClient mFusedLocationClient;
     private Location mCurrentLocation ;
 
-    GoogleMap mGoogleMap = null;
+    static GoogleMap mGoogleMap = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
