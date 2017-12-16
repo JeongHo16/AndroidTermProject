@@ -45,8 +45,10 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
 
         if (!checkLocationPermissions()) { //위치접근 권한 확인 11주차 강의자료 참고
             requestLocationPermissions(REQUEST_PERMISSIONS_FOR_LAST_KNOWN_LOCATION);
-        } else
-            getLastLocation();
+        } else{
+            //getLastLocation();
+        }
+
     }
 
     @Override
@@ -60,6 +62,7 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.currentLocation:
+                getLastLocation();
                 return true;
 
             case R.id.one:
