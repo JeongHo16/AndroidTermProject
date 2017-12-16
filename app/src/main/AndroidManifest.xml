@@ -13,6 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCZwaBQvJJsGxJK_zVK5nxHn7AMCjylC9I" />
+
         <activity android:name=".RestaurantDetailActivity">
             <intent-filter>
 
@@ -61,9 +66,6 @@
         참조 사이트
         http://webnautes.tistory.com/647
         -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCZwaBQvJJsGxJK_zVK5nxHn7AMCjylC9I" />
 
         <activity android:name=".RestaurantMap"></activity>
     </application>

@@ -9,16 +9,19 @@ import android.os.Bundle;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallback{
 
     final int REQUEST_EXTERNAL_STORAGE_FOR_MULTIMEDIA = 1;
 
     private FusedLocationProviderClient fusedLocationProviderClient;
-    GoogleMap mGoogleMap = null;
+    private GoogleMap mGoogleMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,15 +29,22 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
 
         checkDangerousPermissions(); // 위치 접근권한 확인
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        final SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         mapFragment.getMapAsync(this);
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
+
+        LatLng hansung = new LatLng(37.5817891, 127.009854);
+        googleMap.addMarker(new MarkerOptions().position(hansung).title("한성대학교"));
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hansung,15));
     }
 
     private void checkDangerousPermissions(){
