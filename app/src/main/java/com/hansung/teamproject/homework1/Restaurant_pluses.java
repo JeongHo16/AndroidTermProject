@@ -100,8 +100,10 @@ public class Restaurant_pluses extends AppCompatActivity {
                 }
                 if(count == 0){             //count가 만약 0이면 그대로 db에 입력해주기
                     resHelper.insertUserByMethod(plusesImageUri, plusesName, plusesAddress, plusesPhone);
+
                     LatLng latLng = getLatLng(plusesAddress);
                     myMarker.add(new com.hansung.teamproject.homework1.Marker(latLng, plusesName));
+
                     Toast.makeText(getApplicationContext(), "맛집이 등록되었습니다.", Toast.LENGTH_SHORT).show();
                 }else{
                     count = 0;
@@ -180,23 +182,6 @@ public class Restaurant_pluses extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, permissions, REQUEST_EXTERNAL_STORAGE_FOR_MULTIMEDIA);
         }
     }
-
-    /*public LatLng getLatLng(String address){
-        Address getAddress;
-        LatLng getLatLng = null;
-        try{
-            Geocoder geocoder = new Geocoder(this, Locale.KOREA);
-            List<Address> addresses = geocoder.getFromLocationName(address, 1);
-            if(addresses.size() >0){
-                getAddress = (Address) addresses.get(0);
-                getLatLng = new LatLng(getAddress.getLatitude(), getAddress.getLongitude());
-                Log.i("Get Address : ", "주소 : " +  getAddress.getLatitude() + ", " + getAddress.getLongitude());
-            }
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-        return getLatLng;
-    }*/
 
     LatLng getLatLng(String address) {
         LatLng getLatLng = null;
