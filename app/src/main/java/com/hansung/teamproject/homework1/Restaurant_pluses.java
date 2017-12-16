@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -33,15 +34,18 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import static com.hansung.teamproject.homework1.RestaurantMap.myMarker;
 
 /**
  * Created by Junho on 2017-11-18.
  */
 
-public class Restaurant_pluses extends AppCompatActivity implements OnMapReadyCallback{
+public class Restaurant_pluses extends AppCompatActivity {
 
     final int REQUEST_EXTERNAL_STORAGE_FOR_MULTIMEDIA = 1;
     final int REQUEST_IMAGE_CAPTURE = 100;
@@ -53,16 +57,12 @@ public class Restaurant_pluses extends AppCompatActivity implements OnMapReadyCa
     Uri imageUri;
     int count = 0;
 
-    GoogleMap mGoogleMap = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant_pluses);
 
         checkDangerousPermissions();        // 파일 권한 확인 - 읽기, 쓰기, 위치
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
 
         final ImageButton camera = (ImageButton) findViewById(R.id.cameraBtn);
         camera.setOnClickListener(new View.OnClickListener() {             // 카메라 눌렀을 경우 동작
@@ -97,13 +97,8 @@ public class Restaurant_pluses extends AppCompatActivity implements OnMapReadyCa
                 }
                 if(count == 0){             //count가 만약 0이면 그대로 db에 입력해주기
                     resHelper.insertUserByMethod(plusesImageUri, plusesName, plusesAddress, plusesPhone);
-                    LatLng putLatLng = getLatLng(plusesAddress);
-                    mGoogleMap.addMarker(new MarkerOptions().
-                            position(putLatLng).
-                            title(plusesName).
-                            alpha(0.7f).
-                            icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place_black_24dp))
-                    );
+                    LatLng latLng = getLatLng(plusesName);
+                    myMarker.add(new com.hansung.teamproject.homework1.Marker(latLng, plusesName));
                     Toast.makeText(getApplicationContext(), "맛집이 등록되었습니다.", Toast.LENGTH_SHORT).show();
                 }else{
                     count = 0;
@@ -183,11 +178,6 @@ public class Restaurant_pluses extends AppCompatActivity implements OnMapReadyCa
         }
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mGoogleMap = googleMap;
-    }
-
     public LatLng getLatLng(String address){
         Address getAddress;
         LatLng getLatLng = null;
@@ -202,6 +192,6 @@ public class Restaurant_pluses extends AppCompatActivity implements OnMapReadyCa
         }catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return getLatLng;
     }
 }

@@ -9,6 +9,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,8 +22,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
+import java.util.ArrayList;
 
 public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallback{
     final private int REQUEST_PERMISSIONS_FOR_LAST_KNOWN_LOCATION = 1;
@@ -31,6 +35,8 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
     private Location mCurrentLocation ;
 
     GoogleMap mGoogleMap = null;
+
+    static ArrayList<Marker> myMarker = new ArrayList<Marker>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,5 +151,23 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
+        getMarker();
+    }
+
+    public void getMarker(){
+        try{
+            if(myMarker.size() >0){
+                for(int i = 0; i < myMarker.size(); i++){
+                    mGoogleMap.addMarker(new MarkerOptions().
+                            position(new LatLng(myMarker.get(i).lat, myMarker.get(i).lon)).
+                            title(myMarker.get(i).title)
+                    );
+                    Log.i("MyMarker Pluse", i+ "번쨰");
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myMarker.get(i).lat, myMarker.get(i).lon),15));
+                }
+            }
+        }catch (NullPointerException e){
+            return;
+        }
     }
 }
