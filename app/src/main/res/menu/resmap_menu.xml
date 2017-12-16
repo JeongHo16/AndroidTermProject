@@ -6,19 +6,20 @@
         android:icon="@drawable/ic_gps_fixed_black_24dp"
         app:showAsAction="always"/>
 
+    <group android:id="@+id/group"
+    android:checkableBehavior="single">
     <item
         android:id="@+id/one"
-        android:title="1KM"
-        app:showAsAction="collapseActionView"/>
+        android:title="1KM" />
 
     <item
         android:id="@+id/two"
-        android:title="2KM"
-        app:showAsAction="collapseActionView"/>
+        android:title="2KM" />
 
     <item
         android:id="@+id/three"
-        android:title="3KM"
-        app:showAsAction="collapseActionView"/>
+        android:title="3KM" />
+</group>
+
 
 </menu>

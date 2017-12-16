@@ -27,6 +27,12 @@ tools:context="com.hansung.teamproject.homework1.RestaurantMap">
             android:text="검색" />
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Result"
+        android:id="@+id/result"/>
+
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"

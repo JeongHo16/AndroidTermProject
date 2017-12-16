@@ -30,7 +30,7 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
     private FusedLocationProviderClient mFusedLocationClient;
     private Location mCurrentLocation ;
 
-    static GoogleMap mGoogleMap = null;
+    GoogleMap mGoogleMap = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +43,12 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
+
+
         if (!checkLocationPermissions()) { //위치접근 권한 확인 11주차 강의자료 참고
             requestLocationPermissions(REQUEST_PERMISSIONS_FOR_LAST_KNOWN_LOCATION);
         } else{
-            //getLastLocation();
+            getLastLocation();
         }
 
     }
@@ -55,23 +57,35 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.resmap_menu, menu);
+        menu.findItem(R.id.one).setChecked(true);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        item.setChecked(true);
+
         switch (item.getItemId()) {
             case R.id.currentLocation:
                 getLastLocation();
                 return true;
 
             case R.id.one:
+                LatLng newLocation = new LatLng(mCurrentLocation.getLatitude(),
+                        mCurrentLocation.getLongitude());
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, 15));
                 return true;
 
             case R.id.two:
+                LatLng newLocation2 = new LatLng(mCurrentLocation.getLatitude(),
+                        mCurrentLocation.getLongitude());
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation2, 14));
                 return true;
 
             case R.id.three:
+                LatLng newLocation3 = new LatLng(mCurrentLocation.getLatitude(),
+                        mCurrentLocation.getLongitude());
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation3, 13));
                 return true;
 
             default:
@@ -120,7 +134,7 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
                     mCurrentLocation = location;
                     LatLng newLocation = new LatLng(mCurrentLocation.getLatitude(),
                             mCurrentLocation.getLongitude());
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation,15));
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, 15));
                 } else
                     Toast.makeText(getApplicationContext(),
                             "No Location Detected", Toast.LENGTH_SHORT).show();
