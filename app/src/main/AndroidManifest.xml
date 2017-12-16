@@ -48,22 +48,14 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.hansung.teamproject.homework1"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
+
         <!--
         참조 사이트
         http://webnautes.tistory.com/647
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCZwaBQvJJsGxJK_zVK5nxHn7AMCjylC9I" />
+            android:value="AIzaSyA1W8lyR7Wyc79kKH8j63kwDriHyJawano" />
 
         <activity android:name=".RestaurantMap"></activity>
     </application>
