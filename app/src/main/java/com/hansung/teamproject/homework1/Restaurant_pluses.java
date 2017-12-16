@@ -20,6 +20,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,7 +33,7 @@ import java.util.Date;
  * Created by Junho on 2017-11-18.
  */
 
-public class Restaurant_pluses extends AppCompatActivity{
+public class Restaurant_pluses extends AppCompatActivity implements OnMapReadyCallback{
 
     final int REQUEST_EXTERNAL_STORAGE_FOR_MULTIMEDIA = 1;
     final int REQUEST_IMAGE_CAPTURE = 100;
@@ -157,4 +162,13 @@ public class Restaurant_pluses extends AppCompatActivity{
             ActivityCompat.requestPermissions(this, permissions, REQUEST_EXTERNAL_STORAGE_FOR_MULTIMEDIA);
         }
     }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+    }
+
+  /*  public final Marker addMarker(MarkerOptions options) {
+        return
+    }*/
 }

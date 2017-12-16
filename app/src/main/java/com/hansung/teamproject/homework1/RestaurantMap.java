@@ -22,7 +22,7 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         mapFragment.getMapAsync(this);
     }
-    
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
