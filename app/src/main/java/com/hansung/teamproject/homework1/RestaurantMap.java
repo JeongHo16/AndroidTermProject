@@ -1,6 +1,7 @@
 package com.hansung.teamproject.homework1;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.NonNull;
@@ -8,6 +9,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -43,6 +47,33 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
             requestLocationPermissions(REQUEST_PERMISSIONS_FOR_LAST_KNOWN_LOCATION);
         } else
             getLastLocation();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.resmap_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.currentLocation:
+                return true;
+
+            case R.id.one:
+                return true;
+
+            case R.id.two:
+                return true;
+
+            case R.id.three:
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private boolean checkLocationPermissions() { //11주차 강의자료 참고

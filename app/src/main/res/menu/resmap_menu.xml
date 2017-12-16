@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/currentLocation"
+        android:title="current"
+        android:icon="@drawable/ic_gps_fixed_black_24dp"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/one"
+        android:title="1KM"
+        app:showAsAction="collapseActionView"/>
+
+    <item
+        android:id="@+id/two"
+        android:title="2KM"
+        app:showAsAction="collapseActionView"/>
+
+    <item
+        android:id="@+id/three"
+        android:title="3KM"
+        app:showAsAction="collapseActionView"/>
+
+</menu>
