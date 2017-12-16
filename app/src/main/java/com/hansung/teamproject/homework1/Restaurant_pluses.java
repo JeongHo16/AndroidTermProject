@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -45,12 +46,16 @@ public class Restaurant_pluses extends AppCompatActivity implements OnMapReadyCa
     Uri imageUri;
     int count = 0;
 
+    GoogleMap mGoogleMap = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant_pluses);
 
-        checkDangerousPermissions();        // 파일 권한 확인 - 읽기, 쓰기
+        checkDangerousPermissions();        // 파일 권한 확인 - 읽기, 쓰기, 위치
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         final ImageButton camera = (ImageButton) findViewById(R.id.cameraBtn);
         camera.setOnClickListener(new View.OnClickListener() {             // 카메라 눌렀을 경우 동작
@@ -165,10 +170,6 @@ public class Restaurant_pluses extends AppCompatActivity implements OnMapReadyCa
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
+        mGoogleMap = googleMap;
     }
-
-  /*  public final Marker addMarker(MarkerOptions options) {
-        return
-    }*/
 }
