@@ -14,7 +14,7 @@ tools:context="com.hansung.teamproject.homework1.RestaurantMap">
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/findtext"
+            android:id="@+id/findText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Enter the name of a place to find"
