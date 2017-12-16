@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.location.Address;
+import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,12 +25,17 @@ import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Junho on 2017-11-18.
@@ -90,13 +97,21 @@ public class Restaurant_pluses extends AppCompatActivity implements OnMapReadyCa
                 }
                 if(count == 0){             //count가 만약 0이면 그대로 db에 입력해주기
                     resHelper.insertUserByMethod(plusesImageUri, plusesName, plusesAddress, plusesPhone);
+                    LatLng putLatLng = getLatLng(plusesAddress);
+                    mGoogleMap.addMarker(new MarkerOptions().
+                            position(putLatLng).
+                            title(plusesName).
+                            alpha(0.7f).
+                            icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place_black_24dp))
+                    );
                     Toast.makeText(getApplicationContext(), "맛집이 등록되었습니다.", Toast.LENGTH_SHORT).show();
                 }else{
                     count = 0;
                     //return;
                 }
-                Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);        // 인텐트 선언
-                intent.putExtra("plusesName", plusesName);
+                /*Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);        // 인텐트 선언
+                intent.putExtra("plusesName", plusesName);*/
+                Intent intent = new Intent(getApplicationContext(), RestaurantMap.class);
                 startActivity(intent);                  //인텐트 넘기기
             }
         });
@@ -152,7 +167,7 @@ public class Restaurant_pluses extends AppCompatActivity implements OnMapReadyCa
         String[] permissions = {
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.ACCESS_FINE_LOCATION
+                //Manifest.permission.ACCESS_FINE_LOCATION      RestaurantMap에서 권한 확인
         };
 
         int permissionCheck = PackageManager.PERMISSION_GRANTED;
@@ -171,5 +186,22 @@ public class Restaurant_pluses extends AppCompatActivity implements OnMapReadyCa
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
+    }
+
+    public LatLng getLatLng(String address){
+        Address getAddress;
+        LatLng getLatLng = null;
+        try{
+            Geocoder geocoder = new Geocoder(this, Locale.KOREA);
+            List<Address> addresses = geocoder.getFromLocationName(address, 1);
+            if(addresses.size() >0){
+                getAddress = (Address) addresses.get(0);
+                getLatLng = new LatLng(getAddress.getLatitude(), getAddress.getLongitude());
+                Log.i("Get Address : ", "주소 : " +  getAddress.getLatitude() + ", " + getAddress.getLongitude());
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
