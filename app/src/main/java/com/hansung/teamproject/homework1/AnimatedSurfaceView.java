@@ -71,8 +71,11 @@ public class AnimatedSurfaceView extends SurfaceView implements SurfaceHolder.Ca
                     b.draw(canvas);
                 }
             }
-
-            holder.unlockCanvasAndPost(canvas);
+            try{
+                holder.unlockCanvasAndPost(canvas);
+            }catch (Exception e){
+                break;
+            }
         }
     }
 
