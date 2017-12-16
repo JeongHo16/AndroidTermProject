@@ -29,6 +29,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,6 +49,7 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
     GoogleMap mGoogleMap = null;
 
     static ArrayList<Marker> myMarker = new ArrayList<Marker>();
+    EditText findText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +72,7 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
         findButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText findText = (EditText) findViewById(R.id.findText);
+                findText = (EditText) findViewById(R.id.findText);
                 findLocation(findText.getText().toString());
             }
         });
@@ -116,13 +118,15 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
         builder.setPositiveButton("예",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(),"예를 선택했습니다.",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), Restaurant_pluses.class);
+                        intent.putExtra("address", findText.getText().toString());
+                        startActivity(intent);
                     }
                 });
         builder.setNegativeButton("아니오",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(),"아니오를 선택했습니다.",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"등록하지 않습니다.",Toast.LENGTH_LONG).show();
                     }
                 });
         builder.show();

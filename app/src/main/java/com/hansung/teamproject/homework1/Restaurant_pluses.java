@@ -76,6 +76,9 @@ public class Restaurant_pluses extends AppCompatActivity {
         final EditText address = (EditText) findViewById(R.id.address);
         final EditText phone = (EditText) findViewById(R.id.phone);
 
+        Intent regIntent = getIntent();
+        address.setText(regIntent.getStringExtra("address"));
+
         resHelper = new ResHelper(this);
         Button pluses = (Button) findViewById(R.id.pluses);
         pluses.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +100,7 @@ public class Restaurant_pluses extends AppCompatActivity {
                 }
                 if(count == 0){             //count가 만약 0이면 그대로 db에 입력해주기
                     resHelper.insertUserByMethod(plusesImageUri, plusesName, plusesAddress, plusesPhone);
-                    LatLng latLng = getLatLng(plusesName);
+                    LatLng latLng = getLatLng(plusesAddress);
                     myMarker.add(new com.hansung.teamproject.homework1.Marker(latLng, plusesName));
                     Toast.makeText(getApplicationContext(), "맛집이 등록되었습니다.", Toast.LENGTH_SHORT).show();
                 }else{
@@ -178,7 +181,7 @@ public class Restaurant_pluses extends AppCompatActivity {
         }
     }
 
-    public LatLng getLatLng(String address){
+    /*public LatLng getLatLng(String address){
         Address getAddress;
         LatLng getLatLng = null;
         try{
@@ -191,6 +194,22 @@ public class Restaurant_pluses extends AppCompatActivity {
             }
         }catch (IOException e) {
             e.printStackTrace();
+        }
+        return getLatLng;
+    }*/
+
+    LatLng getLatLng(String address) {
+        LatLng getLatLng = null;
+        try {
+            Geocoder geocoder = new Geocoder(this, Locale.KOREA);
+            List<Address> addresses = geocoder.getFromLocationName(address,1);
+            if (addresses.size() >0) {
+                Address bestResult = (Address) addresses.get(0);
+
+                getLatLng = new LatLng(bestResult.getLatitude(), bestResult.getLongitude());
+            }
+        } catch (IOException e) {
+            Log.e(getClass().toString(),"Failed in using Geocoder.", e);
         }
         return getLatLng;
     }
