@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".RestaurantDetailActivity">
             <intent-filter>
 
@@ -20,15 +21,18 @@
                 <action android:name="android.intent.categry.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MenuDetailActivity"
             android:parentActivityName=".RestaurantDetailActivity"></activity>
         <activity android:name=".Restaurant_pluses" />
+
         <activity android:name=".MenuRegistrationActivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".StartActivity">
             <intent-filter>
 
@@ -53,10 +57,11 @@
         참조 사이트
         http://webnautes.tistory.com/647
         -->
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA1W8lyR7Wyc79kKH8j63kwDriHyJawano" />
-
+        
         <activity android:name=".RestaurantMap"></activity>
     </application>
 
