@@ -83,7 +83,7 @@ public class Restaurant_pluses extends AppCompatActivity{
                     Toast.makeText(getApplicationContext(), "맛집이 등록되었습니다.", Toast.LENGTH_SHORT).show();
                 }else{
                     count = 0;
-                    return;
+                    //return;
                 }
                 Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);        // 인텐트 선언
                 intent.putExtra("plusesName", plusesName);

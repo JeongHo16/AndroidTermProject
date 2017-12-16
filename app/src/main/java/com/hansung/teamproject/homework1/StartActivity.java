@@ -26,7 +26,7 @@ public class StartActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Intent intent = new Intent(StartActivity.this, Restaurant_pluses.class);
+                Intent intent = new Intent(StartActivity.this, RestaurantMap.class);
                 startActivity(intent);
             }
         }.start();

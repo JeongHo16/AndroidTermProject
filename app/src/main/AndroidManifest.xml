@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -13,30 +13,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".RestaurantDetailActivity">
             <intent-filter>
-                <!--인텐트 넘겨받기-->
-                <action android:name="android.intent.categry.DEFAULT"/>
+
+                <!-- 인텐트 넘겨받기 -->
+                <action android:name="android.intent.categry.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".MenuDetailActivity"
-            android:parentActivityName=".RestaurantDetailActivity">
-        </activity>
-
-        <activity android:name=".Restaurant_pluses"></activity>
-
+        <activity
+            android:name=".MenuDetailActivity"
+            android:parentActivityName=".RestaurantDetailActivity"></activity>
+        <activity android:name=".Restaurant_pluses" />
         <activity android:name=".MenuRegistrationActivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".StartActivity">
             <intent-filter>
-                <!--// 시작 엑티비티-->
+
+                <!-- // 시작 엑티비티 -->
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -50,20 +48,24 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.hansung.teamproject.homework1"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        <!--
+        참조 사이트
+        http://webnautes.tistory.com/647
+        -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCZwaBQvJJsGxJK_zVK5nxHn7AMCjylC9I"
-            />
+            android:value="AIzaSyCZwaBQvJJsGxJK_zVK5nxHn7AMCjylC9I" />
+
+        <activity android:name=".RestaurantMap"></activity>
     </application>
 
 </manifest>
