@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -15,7 +16,8 @@
 
         <activity android:name=".RestaurantDetailActivity">
             <intent-filter>
-                <action android:name="android.intent.categry.DEFAULT"/>         // 인텐트 넘겨받기
+                <!--인텐트 넘겨받기-->
+                <action android:name="android.intent.categry.DEFAULT"/>
             </intent-filter>
         </activity>
 
@@ -33,7 +35,8 @@
 
         <activity android:name=".StartActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />        // 시작 엑티비티
+                <!--// 시작 엑티비티-->
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -57,6 +60,10 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCZwaBQvJJsGxJK_zVK5nxHn7AMCjylC9I"
+            />
     </application>
 
 </manifest>
