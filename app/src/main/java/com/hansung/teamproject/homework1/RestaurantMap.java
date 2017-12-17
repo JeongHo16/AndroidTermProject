@@ -96,7 +96,6 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
         return getLatLng;
     }
 
-    String putTitle;
     public void getMarker(){
         resHelper = new ResHelper(this);
         Cursor cursor = resHelper.getAllUsersBySQL();
@@ -109,12 +108,11 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
                     title(cursor.getString(2)).
                     icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
             );
-            putTitle = cursor.getString(2);
             mGoogleMap.setOnMarkerClickListener(new MyMarkerClickListener(){
                 @Override
                 public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) {
                     Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);
-                    intent.putExtra("plusesName",putTitle);
+                    intent.putExtra("plusesName",marker.getTitle());
                     startActivity(intent);
                     return false;
                 }
