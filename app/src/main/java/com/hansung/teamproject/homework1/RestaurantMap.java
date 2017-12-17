@@ -227,20 +227,45 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
         getMarker();
     }
 
+    String putTitle;
     public void getMarker(){
         try{
             if(myMarker.size() >0){
                 for(int i = 0; i < myMarker.size(); i++){
                     mGoogleMap.addMarker(new MarkerOptions().
                             position(new LatLng(myMarker.get(i).lat, myMarker.get(i).lon)).
-                            title(myMarker.get(i).title)
+                            title(myMarker.get(i).title).
+                            icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
                     );
-                    Log.i("MyMarker Pluse", i+ "번쨰");
+                    Log.i("MyMarker Plus", i+ "번쨰");
+                    putTitle = myMarker.get(i).title;
                     mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myMarker.get(i).lat, myMarker.get(i).lon),15));
+                    mGoogleMap.setOnMarkerClickListener(new MyMarkerClickListener(){
+                        @Override
+                        public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) {
+                            Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);
+                            intent.putExtra("plusesName",putTitle);
+                            startActivity(intent);
+                            return false;
+                        }
+                    });
                 }
             }
         }catch (NullPointerException e){
             return;
         }
     }
+
+    /*class rMarkerClickListener implements GoogleMap.OnMarkerClickListener {
+        @Override
+        public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) {
+            rclick();
+            return false;
+        }
+    }
+
+    void rclick() {
+        Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);
+        intent
+    }*/
 }

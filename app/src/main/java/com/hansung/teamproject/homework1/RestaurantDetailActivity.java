@@ -153,6 +153,11 @@ public class RestaurantDetailActivity extends AppCompatActivity implements Resta
                 startActivity(intent);
                 return true;
 
+            case R.id.map:
+                Intent intent2 = new Intent(getApplicationContext(), RestaurantMap.class);
+                startActivity(intent2);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
