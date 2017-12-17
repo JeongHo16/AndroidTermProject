@@ -115,6 +115,19 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
     void findLocation(String input) {
         TextView result = (TextView)findViewById(R.id.result);
         try {
+            resHelper = new ResHelper(this);
+            Cursor cursor = resHelper.getAllUsersBySQL();
+
+            while(cursor.moveToNext()) {
+                if(cursor.getString(2).equals(input)) {
+                    LatLng alregist = getLatLng(cursor.getString(3));
+                    mGoogleMap.addMarker(new MarkerOptions().position(alregist).title(input));
+                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(alregist,15));
+                    mGoogleMap.setOnMarkerClickListener(new MyMarkerClickListener());
+                    return;
+                }
+            }
+
             Geocoder geocoder = new Geocoder(this, Locale.KOREA);
             List<Address> addresses = geocoder.getFromLocationName(input,1);
             if (addresses.size() >0) {
