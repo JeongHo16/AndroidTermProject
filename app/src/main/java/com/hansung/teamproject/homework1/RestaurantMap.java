@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -48,8 +49,9 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
 
     GoogleMap mGoogleMap = null;
 
-    static ArrayList<Marker> myMarker = new ArrayList<Marker>();
     EditText findText;
+
+    private ResHelper resHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +78,48 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
                 findLocation(findText.getText().toString());
             }
         });
+    }
 
+    LatLng getLatLng(String address) {
+        LatLng getLatLng = null;
+        try {
+            Geocoder geocoder = new Geocoder(this, Locale.KOREA);
+            List<Address> addresses = geocoder.getFromLocationName(address,1);
+            if (addresses.size() >0) {
+                Address bestResult = (Address) addresses.get(0);
+
+                getLatLng = new LatLng(bestResult.getLatitude(), bestResult.getLongitude());
+            }
+        } catch (IOException e) {
+            Log.e(getClass().toString(),"Failed in using Geocoder.", e);
+        }
+        return getLatLng;
+    }
+
+    String putTitle;
+    public void getMarker(){
+        resHelper = new ResHelper(this);
+        Cursor cursor = resHelper.getAllUsersBySQL();
+
+        while(cursor.moveToNext()){
+            LatLng address = getLatLng(cursor.getString(3));
+
+            mGoogleMap.addMarker(new MarkerOptions().
+                    position(address).
+                    title(cursor.getString(2)).
+                    icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
+            );
+            putTitle = cursor.getString(2);
+            mGoogleMap.setOnMarkerClickListener(new MyMarkerClickListener(){
+                @Override
+                public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) {
+                    Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);
+                    intent.putExtra("plusesName",putTitle);
+                    startActivity(intent);
+                    return false;
+                }
+            });
+        }
     }
 
     void findLocation(String input) {
@@ -226,46 +269,4 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
         mGoogleMap = googleMap;
         getMarker();
     }
-
-    String putTitle;
-    public void getMarker(){
-        try{
-            if(myMarker.size() >0){
-                for(int i = 0; i < myMarker.size(); i++){
-                    mGoogleMap.addMarker(new MarkerOptions().
-                            position(new LatLng(myMarker.get(i).lat, myMarker.get(i).lon)).
-                            title(myMarker.get(i).title).
-                            icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
-                    );
-                    Log.i("MyMarker Plus", i+ "번쨰");
-                    putTitle = myMarker.get(i).title;
-                    mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myMarker.get(i).lat, myMarker.get(i).lon),15));
-                    mGoogleMap.setOnMarkerClickListener(new MyMarkerClickListener(){
-                        @Override
-                        public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) {
-                            Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);
-                            intent.putExtra("plusesName",putTitle);
-                            startActivity(intent);
-                            return false;
-                        }
-                    });
-                }
-            }
-        }catch (NullPointerException e){
-            return;
-        }
-    }
-
-    /*class rMarkerClickListener implements GoogleMap.OnMarkerClickListener {
-        @Override
-        public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) {
-            rclick();
-            return false;
-        }
-    }
-
-    void rclick() {
-        Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);
-        intent
-    }*/
 }

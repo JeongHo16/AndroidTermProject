@@ -39,8 +39,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static com.hansung.teamproject.homework1.RestaurantMap.myMarker;
-
 /**
  * Created by Junho on 2017-11-18.
  */
@@ -100,9 +98,6 @@ public class Restaurant_pluses extends AppCompatActivity {
                 }
                 if(count == 0){             //count가 만약 0이면 그대로 db에 입력해주기
                     resHelper.insertUserByMethod(plusesImageUri, plusesName, plusesAddress, plusesPhone);
-
-                    LatLng latLng = getLatLng(plusesAddress);
-                    myMarker.add(new com.hansung.teamproject.homework1.Marker(latLng, plusesName));
 
                     Toast.makeText(getApplicationContext(), "맛집이 등록되었습니다.", Toast.LENGTH_SHORT).show();
                 }else{
@@ -181,21 +176,5 @@ public class Restaurant_pluses extends AppCompatActivity {
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, permissions, REQUEST_EXTERNAL_STORAGE_FOR_MULTIMEDIA);
         }
-    }
-
-    LatLng getLatLng(String address) {
-        LatLng getLatLng = null;
-        try {
-            Geocoder geocoder = new Geocoder(this, Locale.KOREA);
-            List<Address> addresses = geocoder.getFromLocationName(address,1);
-            if (addresses.size() >0) {
-                Address bestResult = (Address) addresses.get(0);
-
-                getLatLng = new LatLng(bestResult.getLatitude(), bestResult.getLongitude());
-            }
-        } catch (IOException e) {
-            Log.e(getClass().toString(),"Failed in using Geocoder.", e);
-        }
-        return getLatLng;
     }
 }
