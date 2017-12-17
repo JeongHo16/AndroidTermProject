@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -31,6 +32,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -196,31 +198,77 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
         return super.onCreateOptionsMenu(menu);
     }
 
+    float getDistance(LatLng address) {
+        float [] distance = new float[2];
+        float result;
+
+        Location.distanceBetween(address.latitude, address.longitude,
+                mCurrentLocation.getLatitude(),mCurrentLocation.getLongitude(),distance);
+        result = distance[0];
+        return result;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         item.setChecked(true);
+        resHelper = new ResHelper(this);
+        Cursor cursor = resHelper.getAllUsersBySQL();
 
         switch (item.getItemId()) {
             case R.id.currentLocation:
                 getLastLocation();
+                mGoogleMap.clear();
                 getMarker();
                 return true;
 
             case R.id.one:
                 LatLng newLocation = new LatLng(mCurrentLocation.getLatitude(),
                         mCurrentLocation.getLongitude());
+                mGoogleMap.clear();
+                while(cursor.moveToNext()) {
+                    LatLng address = getLatLng(cursor.getString(3));
+                    if(getDistance(address)<=500.0){
+                        mGoogleMap.addMarker(new MarkerOptions().position(address).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)).
+                                title(cursor.getString(2)));
+                        mGoogleMap.setOnMarkerClickListener(new MyMarkerClickListener());
+                    }
+                }
+                mGoogleMap.addCircle(new CircleOptions().center(newLocation).radius(500).
+                        strokeWidth(1).fillColor(Color.argb(30,0,0,30)));
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation, 15));
                 return true;
 
             case R.id.two:
                 LatLng newLocation2 = new LatLng(mCurrentLocation.getLatitude(),
                         mCurrentLocation.getLongitude());
+                mGoogleMap.clear();
+                while(cursor.moveToNext()) {
+                    LatLng address = getLatLng(cursor.getString(3));
+                    if(getDistance(address)<=1000.0){
+                        mGoogleMap.addMarker(new MarkerOptions().position(address).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)).
+                                title(cursor.getString(2)));
+                        mGoogleMap.setOnMarkerClickListener(new MyMarkerClickListener());
+                    }
+                }
+                mGoogleMap.addCircle(new CircleOptions().center(newLocation2).radius(1000).
+                        strokeWidth(1).fillColor(Color.argb(30,0,0,30)));
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation2, 14));
                 return true;
 
             case R.id.three:
                 LatLng newLocation3 = new LatLng(mCurrentLocation.getLatitude(),
                         mCurrentLocation.getLongitude());
+                mGoogleMap.clear();
+                while(cursor.moveToNext()) {
+                    LatLng address = getLatLng(cursor.getString(3));
+                    if(getDistance(address)<=1500.0){
+                        mGoogleMap.addMarker(new MarkerOptions().position(address).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker)).
+                                title(cursor.getString(2)));
+                        mGoogleMap.setOnMarkerClickListener(new MyMarkerClickListener());
+                    }
+                }
+                mGoogleMap.addCircle(new CircleOptions().center(newLocation3).radius(1500).
+                        strokeWidth(1).fillColor(Color.argb(30,0,0,30)));
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newLocation3, 13));
                 return true;
 
