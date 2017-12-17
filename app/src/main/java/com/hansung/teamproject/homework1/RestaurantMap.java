@@ -108,15 +108,7 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
                     title(cursor.getString(2)).
                     icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
             );
-            mGoogleMap.setOnMarkerClickListener(new MyMarkerClickListener(){
-                @Override
-                public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) {
-                    Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);
-                    intent.putExtra("plusesName",marker.getTitle());
-                    startActivity(intent);
-                    return false;
-                }
-            });
+            mGoogleMap.setOnMarkerClickListener(new MyMarkerClickListener());
         }
     }
 
@@ -147,6 +139,16 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
     class MyMarkerClickListener implements GoogleMap.OnMarkerClickListener {
         @Override
         public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) {
+            resHelper = new ResHelper(getApplicationContext());
+            Cursor cursor = resHelper.getAllUsersBySQL();
+            while(cursor.moveToNext()) {
+                if(cursor.getString(2).equals(marker.getTitle())) {
+                    Intent intent = new Intent(getApplicationContext(), RestaurantDetailActivity.class);
+                    intent.putExtra("plusesName",marker.getTitle());
+                    startActivity(intent);
+                    return true;
+                }
+            }
             click();
             return false;
         }
@@ -188,6 +190,7 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
         switch (item.getItemId()) {
             case R.id.currentLocation:
                 getLastLocation();
+                getMarker();
                 return true;
 
             case R.id.one:
