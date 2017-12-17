@@ -82,16 +82,4 @@ public class AnimatedSurfaceView extends SurfaceView implements SurfaceHolder.Ca
             aryBall.add(new Ball(random.nextInt(x), random.nextInt(y)));
         }
     }
-
-  /*  public boolean onTouchEvent(MotionEvent event){
-        Log.i("Log checking", "touch" );
-        if (event.getAction() == MotionEvent.ACTION_DOWN){
-            int x = (int)event.getX();
-            int y = (int) event.getY();
-
-            aryBall.add(new Ball(x, y));
-            return true;
-        }
-        return false;
-    }*/
 }

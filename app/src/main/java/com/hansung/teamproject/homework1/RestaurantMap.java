@@ -50,9 +50,7 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
     private Location mCurrentLocation ;
 
     GoogleMap mGoogleMap = null;
-
     EditText findText;
-
     private ResHelper resHelper;
 
     @Override
@@ -82,7 +80,7 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
         });
     }
 
-    LatLng getLatLng(String address) {
+    LatLng getLatLng(String address) { //11주차 강의자료 참고
         LatLng getLatLng = null;
         try {
             Geocoder geocoder = new Geocoder(this, Locale.KOREA);
@@ -114,7 +112,7 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
         }
     }
 
-    void findLocation(String input) {
+    void findLocation(String input) { //11주차 강의자료 참고
         TextView result = (TextView)findViewById(R.id.result);
         try {
             resHelper = new ResHelper(this);
@@ -151,7 +149,7 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
         }
     }
 
-    class MyMarkerClickListener implements GoogleMap.OnMarkerClickListener {
+    class MyMarkerClickListener implements GoogleMap.OnMarkerClickListener { //마커 리스너
         @Override
         public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) {
             resHelper = new ResHelper(getApplicationContext());
@@ -191,17 +189,16 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) { // 액션바 생성
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.resmap_menu, menu);
         menu.findItem(R.id.one).setChecked(true);
         return super.onCreateOptionsMenu(menu);
     }
 
-    float getDistance(LatLng address) {
+    float getDistance(LatLng address) { //http://www.lunchware.co.kr/android/?p=59 참고
         float [] distance = new float[2];
         float result;
-
         Location.distanceBetween(address.latitude, address.longitude,
                 mCurrentLocation.getLatitude(),mCurrentLocation.getLongitude(),distance);
         result = distance[0];
@@ -209,7 +206,7 @@ public class RestaurantMap extends AppCompatActivity implements OnMapReadyCallba
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) { //범위 선택
         item.setChecked(true);
         resHelper = new ResHelper(this);
         Cursor cursor = resHelper.getAllUsersBySQL();
